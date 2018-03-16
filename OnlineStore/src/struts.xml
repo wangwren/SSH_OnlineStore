@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="false" />
+
+    <package name="default" namespace="/" extends="struts-default">
+    	<!-- 首页 -->
+		<action name="index" class="indexAction">
+			<result name="indexSuccess">/WEB-INF/jsp/index.jsp</result>
+		</action>
+		
+		<!-- 注册 -->
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="registPageSuccess">/WEB-INF/jsp/regist.jsp</result>
+			<!-- 后台表单验证失败跳转的界面 -->
+			<result name="input">/WEB-INF/jsp/regist.jsp</result>
+			<result name="registSuccess">/WEB-INF/jsp/msg.jsp</result>
+		</action>
+    </package>
+
+</struts>
