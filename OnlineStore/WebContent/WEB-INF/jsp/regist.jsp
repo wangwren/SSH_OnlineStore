@@ -8,6 +8,7 @@
 <title>会员注册 - Powered By Mango Team</title>
 <link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet" type="text/css"/>
 <link href="${pageContext.request.contextPath}/css/register.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
 	//前台表单验证
 	function checkForm() {
@@ -43,6 +44,22 @@
 			return false;
 		}
 	}
+	
+	//JQ判断数据库中是否存在该用户名
+	function checkName() {
+		var username = $("#username").val();
+		if(username.trim() != ""){
+			var url = "${pageContext.request.contextPath }/user_checkName.action";
+			var param = {"username" : username};
+			$.post(url,param,function(data){
+				if(data && data == "no"){
+					$("#usernameId").html("<font color='red'>登录名已存在</font>");
+				}else{
+					$("#usernameId").html("");
+				}
+			});
+		}
+	}
 </script>
 </head>
 <body>
@@ -61,12 +78,22 @@
 	<div class="span10 last">
 		<div class="topNav clearfix">
 			<ul>
-				<li id="headerLogin" class="headerLogin" style="display: list-item;">
-					<a href="./会员登录.htm">登录</a>|
-				</li>
-				<li id="headerRegister" class="headerRegister" style="display: list-item;">
-					<a href="./会员注册.htm">注册</a>|
-				</li>
+				<s:if test="#session.user != null">
+					<li id="headerLogin" class="headerLogin" style="display: list-item;">
+						<s:property value="#session.username"/>|
+					</li>
+					<li id="headerRegister" class="headerRegister" style="display: list-item;">
+						<a href="#">注销</a>|
+					</li>
+				</s:if>
+				<s:else>
+					<li id="headerLogin" class="headerLogin" style="display: list-item;">
+						<a href="${pageContext.request.contextPath }/user_loginPage.action">登录</a>|
+					</li>
+					<li id="headerRegister" class="headerRegister" style="display: list-item;">
+						<a href="${pageContext.request.contextPath }/user_registPage.action">注册</a>|
+					</li>
+				</s:else>
 				<li id="headerUsername" class="headerUsername"></li>
 				<li id="headerLogout" class="headerLogout">
 					<a href="./index.htm" >[退出]</a>|
@@ -142,7 +169,7 @@
 									<span class="requiredField">*</span>用户名:
 								</th>
 								<td>
-									<input type="text" id="username" name="username" class="text" maxlength="20"><span><s:fielderror fieldName="username"/></span>
+									<input type="text" id="username" name="username" class="text" maxlength="20" onblur="checkName()"><span id="usernameId"></span><span><s:fielderror fieldName="username"/></span>
 								</td>
 							</tr>
 							<tr>

@@ -17,8 +17,16 @@
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="registPageSuccess">/WEB-INF/jsp/regist.jsp</result>
 			<!-- 后台表单验证失败跳转的界面 -->
-			<result name="input">/WEB-INF/jsp/regist.jsp</result>
+			<result name="registInput">/WEB-INF/jsp/regist.jsp</result>
+			<!-- 后台登录失败 -->
+			<result name="loginInput">/WEB-INF/jsp/login.jsp</result>
+			<!-- 注册成功 -->
 			<result name="registSuccess">/WEB-INF/jsp/msg.jsp</result>
+			<!-- 激活成功/失败 -->
+			<result name="activeSuccess">/WEB-INF/jsp/msg.jsp</result>
+			<!-- 登录界面 -->
+			<result name="loginPageSuccess">/WEB-INF/jsp/login.jsp</result>
+			<result name="loginSuccess" type="redirectAction">index</result>
 		</action>
     </package>
 
