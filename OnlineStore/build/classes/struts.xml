@@ -13,7 +13,7 @@
 			<result name="indexSuccess">/WEB-INF/jsp/index.jsp</result>
 		</action>
 		
-		<!-- 注册 -->
+		<!-- 用户 -->
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="registPageSuccess">/WEB-INF/jsp/regist.jsp</result>
 			<!-- 后台表单验证失败跳转的界面 -->
@@ -27,7 +27,12 @@
 			<!-- 登录界面 -->
 			<result name="loginPageSuccess">/WEB-INF/jsp/login.jsp</result>
 			<result name="loginSuccess" type="redirectAction">index</result>
+			<!-- 用户退出 -->
+			<result name="quitSuccess" type="redirectAction">index</result>
 		</action>
+		
+		<!-- 验证码生成器 -->
+		<action name="checkImg" class="checkImg"></action>
     </package>
 
 </struts>

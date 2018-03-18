@@ -60,6 +60,13 @@
 			});
 		}
 	}
+	
+	//点击更换图片验证码
+	function checkImg(){
+		var img = document.getElementById("img");
+		//因为浏览器中有缓存，所以必须加上new Date().getTime()，否则不生效
+		img.src="${pageContext.request.contextPath}/checkImg.action?" + new Date().getTime();
+	}
 </script>
 </head>
 <body>
@@ -83,7 +90,7 @@
 						<s:property value="#session.username"/>|
 					</li>
 					<li id="headerRegister" class="headerRegister" style="display: list-item;">
-						<a href="#">注销</a>|
+						<a href="${pageContext.request.contextPath }/user_quit.action">注销</a>|
 					</li>
 				</s:if>
 				<s:else>
@@ -161,6 +168,9 @@
 				<div class="main clearfix">
 					<div class="title">
 						<strong>会员注册</strong>USER REGISTER
+					</div>
+					<div class="title">
+						${message }
 					</div>
 					<form id="registerForm" action="${pageContext.request.contextPath }/user_regist.action"  method="post" novalidate="novalidate" onsubmit="return checkForm();">
 						<table>
@@ -242,7 +252,7 @@
 									</th>
 									<td>
 										<span class="fieldSet">
-											<input type="text" id="captcha" name="captcha" class="text captcha" maxlength="4" autocomplete="off"><img id="captchaImage" class="captchaImage" src="${pageContext.request.contextPath}/image/captcha.jhtml" title="点击更换验证码">
+											<input type="text" id="checkCode" name="checkCode" class="text captcha" maxlength="4" autocomplete="off"><img id="img" class="captchaImage" src="${pageContext.request.contextPath}/checkImg.action" onclick="checkImg()" title="点击更换验证码">
 										</span>
 									</td>
 								</tr>

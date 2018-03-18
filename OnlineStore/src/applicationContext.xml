@@ -70,6 +70,9 @@
 		<property name="userService" ref="userService"></property>
 	</bean>
 	
+	<!-- 图片验证码 -->
+	<bean id="checkImg" class="vvr.onlinestore.user.CheckImgAction" scope="prototype"></bean>
+	
 	
 	<!-- 配置service -->
 	<!-- 用户 -->

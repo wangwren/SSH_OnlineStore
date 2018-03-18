@@ -55,7 +55,7 @@ public class MailUtils {
 		//设置标题
 		message.setSubject("来自ONLINE STORE的激活邮件");
 		
-		//设置正文,第一个参数代表邮件内容。第二个参数代表邮件格式
+		//设置正文,第一个参数代表邮件内容。第二个参数代表邮件格式，a href='http://172.20.10.2:8080/  写的是本机的ip地址
 		message.setContent("<h1>来自ONLINE STORE的官网激活邮件</h1><h3>请点击下方链接来激活您的账号，若不是您本人操作请忽略该邮件</h3><h5><a href='http://172.20.10.2:8080/OnlineStore/user_active.action?code="+code+"'>http://172.20.10.2:8080/OnlineStore/user_active.action?code="+code+"</a></h5>", "text/html;charset=UTF-8");
 		
 		//3.发送对象

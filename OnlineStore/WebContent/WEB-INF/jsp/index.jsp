@@ -32,7 +32,7 @@
 						<s:property value="#session.user.username"/>|
 					</li>
 					<li id="headerRegister" class="headerRegister" style="display: list-item;">
-						<a href="#">注销</a>|
+						<a href="${pageContext.request.contextPath }/user_quit.action">注销</a>|
 					</li>
 				</s:if>
 				<s:else>

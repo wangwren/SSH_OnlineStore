@@ -25,7 +25,11 @@ public class UserAction extends ActionSupport implements ModelDriven<User>,Reque
 	private UserService userService;
 	private Map<String,Object> request;
 	private Map<String,Object> session;
-	
+	private String checkCode;
+
+	public void setCheckCode(String checkCode) {
+		this.checkCode = checkCode;
+	}
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
@@ -58,6 +62,14 @@ public class UserAction extends ActionSupport implements ModelDriven<User>,Reque
 	 */
 	@InputConfig(resultName="registInput")
 	public String regist() {
+		
+		//判断验证码
+		String imgCode = (String) session.get("checkcode");
+		//验证码为空，或不匹配，这里不区分大小写
+		if(checkCode == null || !checkCode.equalsIgnoreCase(imgCode)) {
+			request.put("message", "验证码有误，请重新输入！！！");
+			return "registInput";
+		}
 		
 		userService.regist(user);
 		request.put("message", "注册成功！请前往您的邮箱激活！");
@@ -101,6 +113,15 @@ public class UserAction extends ActionSupport implements ModelDriven<User>,Reque
 	@InputConfig(resultName="loginInput")
 	public String login() {
 		
+		//判断验证码
+		//判断验证码
+		String imgCode = (String) session.get("checkcode");
+		//验证码为空，或不匹配，这里不区分大小写
+		if(checkCode == null || !checkCode.equalsIgnoreCase(imgCode)) {
+			request.put("message", "验证码有误，请重新输入！！！");
+			return "loginInput";
+		}
+		
 		//查询出登录的用户
 		user = userService.login(user);
 		if(user == null) {
@@ -130,6 +151,23 @@ public class UserAction extends ActionSupport implements ModelDriven<User>,Reque
 		}
 		
 		return NONE;
+	}
+	
+	/**
+	 * 用户退出，销毁session
+	 * @return
+	 */
+	public String quit() {
+		
+		session.remove("user");
+		
+		/*
+		 * 也可以
+		ServletActionContext.getRequest().getSession().invalidate();
+		来销毁session
+		*/
+		
+		return "quitSuccess";
 	}
 
 }
