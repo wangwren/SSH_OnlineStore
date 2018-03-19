@@ -45,6 +45,9 @@
 		<property name="mappingResources">
 			<list>
 				<value>vvr/onlinestore/user/User.hbm.xml</value>
+				<value>vvr/onlinestore/category/Category.hbm.xml</value>
+				<value>vvr/onlinestore/product/Product.hbm.xml</value>
+				<value>vvr/onlinestore/categorysecond/CategorySecond.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -63,15 +66,29 @@
 	
 	<!-- 配置action -->
 	<!-- 首页 -->
-	<bean id="indexAction" class="vvr.onlinestore.index.IndexAction" scope="prototype"></bean>
+	<bean id="indexAction" class="vvr.onlinestore.index.IndexAction" scope="prototype">
+		<property name="categoryService" ref="categoryService"/>
+		<property name="productService" ref="productService"/>
+	</bean>
 	
 	<!-- 用户 -->
 	<bean id="userAction" class="vvr.onlinestore.user.UserAction" scope="prototype">
-		<property name="userService" ref="userService"></property>
+		<property name="userService" ref="userService"/>
 	</bean>
 	
 	<!-- 图片验证码 -->
 	<bean id="checkImg" class="vvr.onlinestore.user.CheckImgAction" scope="prototype"></bean>
+	
+	<!-- 一级分类 -->
+	<bean id="categoryAction" class="vvr.onlinestore.category.CategoryAction" scope="prototype">
+		<property name="categoryService" ref="categoryService"/>
+	</bean>
+	
+	<!-- 商品 -->
+	<bean id="productAction" class="vvr.onlinestore.product.ProductAction" scope="prototype">
+		<property name="productService" ref="productService"/>
+		<property name="categoryService" ref="categoryService"/>
+	</bean>
 	
 	
 	<!-- 配置service -->
@@ -80,9 +97,30 @@
 		<property name="userDao" ref="userDao" />
 	</bean>
 	
+	<!-- 一级分类 -->
+	<bean id="categoryService" class="vvr.onlinestore.category.CategoryService">
+		<property name="categoryDao" ref="categoryDao"/>
+	</bean>
+	
+	<!-- 商品 -->
+	<bean id="productService" class="vvr.onlinestore.product.ProductService">
+		<property name="productDao" ref="productDao"/>
+	</bean>
+	
+	
 	<!-- 配置Dao -->
 	<!-- 用户 -->
 	<bean id="userDao" class="vvr.onlinestore.user.UserDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 一级分类 -->
+	<bean id="categoryDao" class="vvr.onlinestore.category.CategoryDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 商品 -->
+	<bean id="productDao" class="vvr.onlinestore.product.ProductDao">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 </beans>

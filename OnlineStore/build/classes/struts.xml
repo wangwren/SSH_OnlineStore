@@ -33,6 +33,16 @@
 		
 		<!-- 验证码生成器 -->
 		<action name="checkImg" class="checkImg"></action>
+		
+		<!-- 一级分类 -->
+		<action name="category_*" class="categoryAction" method="{1}">
+		
+		</action>
+		
+		<!-- 前台分类显示与数据显示 -->
+		<action name="product_*" class="productAction" method="{1}">
+			<result name="findByCid">/WEB-INF/jsp/list.jsp</result>
+		</action>
     </package>
 
 </struts>

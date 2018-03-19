@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title>传智商城</title>
+<title>笨张张商城</title>
 <link href="${pageContext.request.contextPath}/css/slider.css" rel="stylesheet" type="text/css"/>
 <link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet" type="text/css"/>
 <link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet" type="text/css"/>
@@ -13,104 +13,11 @@
 <body>
 
 <div class="container header">
-	<div class="span5">
-		<div class="logo">
-			<a href="./京华亿家/index.htm">
-				<img src="${pageContext.request.contextPath}/image/r___________renleipic_01/logo.gif" alt="传智播客"/>
-			</a>
-		</div>
-	</div>
-	<div class="span9">
-<div class="headerAd">
-	<img src="${pageContext.request.contextPath}/image/header.jpg" width="320" height="50" alt="正品保障" title="正品保障"/>
-</div>	</div>
-	<div class="span10 last">
-		<div class="topNav clearfix">
-			<ul>
-				<s:if test="#session.user != null">
-					<li id="headerLogin" class="headerLogin" style="display: list-item;">
-						<s:property value="#session.user.username"/>|
-					</li>
-					<li id="headerRegister" class="headerRegister" style="display: list-item;">
-						<a href="${pageContext.request.contextPath }/user_quit.action">注销</a>|
-					</li>
-				</s:if>
-				<s:else>
-					<li id="headerLogin" class="headerLogin" style="display: list-item;">
-						<a href="${pageContext.request.contextPath }/user_loginPage.action">登录</a>|
-					</li>
-					<li id="headerRegister" class="headerRegister" style="display: list-item;">
-						<a href="${pageContext.request.contextPath }/user_registPage.action">注册</a>|
-					</li>
-				</s:else>
-				
-				
-				<li id="headerUsername" class="headerUsername"></li>
-				<li id="headerLogout" class="headerLogout">
-					<a>[退出]</a>|
-				</li>
-						<li>
-							<a>会员中心</a>
-							|
-						</li>
-						<li>
-							<a>购物指南</a>
-							|
-						</li>
-						<li>
-							<a>关于我们</a>
-							
-						</li>
-			</ul>
-		</div>
-		<div class="cart">
-			<a  href="./购物车.htm">购物车</a>
-		</div>
-			<div class="phone">
-				客服热线:
-				<strong>96008/53277764</strong>
-			</div>
-	</div>
-	<div class="span24">
-		<ul class="mainNav">
-					<li>
-						<a href="./index.htm">首页</a>
-						|
-					</li>
-					<li>
-						<a href="./蔬菜分类.htm">定制套餐</a>
-						|
-					</li>
-					<li>
-						<a >安全频道</a>
-						|
-					</li>
-					<li>
-						<a>亿家卡</a>
-						|
-					</li>
-					<li>
-						<a>蔬菜基地</a>
-						|
-					</li>
-					<li>
-						<a>节气养生</a>
-						|
-					</li>
-					<li>
-						<a>便民服务</a>
-						|
-					</li>
-					
-		</ul>
-	</div>
-
-
+	<%@ include file="header.jsp" %>
+	<%@ include file="menu.jsp" %>
 </div>	
 
 <div class="container index">
-		
-
 		<div class="span24">
 			<div id="hotProduct" class="hotProduct clearfix">
 					<div class="title">
@@ -132,36 +39,11 @@
 			<img src="${pageContext.request.contextPath}/image/a.jpg" width="260" height="343" alt="热门商品" title="热门商品">
 </div> -->
 						<ul class="tabContent" style="display: block;">
-									<li>
-										<a target="_blank"><img src="${pageContext.request.contextPath}/image/b.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/0ff130db-0a1b-4b8d-a918-ed9016317009-thumbnail.jpg" style="display: block;"></a>
-									</li>
-									<li>
-										<a  target="_blank"><img src="${pageContext.request.contextPath}/image/c.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/51afeef5-f6cb-4936-abea-315cfca0edc0-thumbnail.jpg" style="display: block;"></a>
-									</li>
-									<li>
-										<a  target="_blank"><img src="${pageContext.request.contextPath}/image/d.jpg" style="display: block;"></a>
-									</li>
-									<li>
-										<a  target="_blank"><img src="${pageContext.request.contextPath}/image/e.jpg" style="display: block;"></a>
-									</li>
-									<li>
-										<a target="_blank"><img src="${pageContext.request.contextPath}/image/f.jpg" style="display: block;"></a>
-									</li>
-									<li>
-										<a  target="_blank"><img src="${pageContext.request.contextPath}/image/g.jpg" style="display: block;"></a>
-									</li>
-									<li>
-										<a  target="_blank"><img src="${pageContext.request.contextPath}/image/h.jpg" style="display: block;"></a>
-									</li>
-									<li>
-										<a target="_blank"><img src="${pageContext.request.contextPath}/image/i.jpg" style="display: block;"></a>
-									</li>
-									<li>
-										<a target="_blank"><img src="${pageContext.request.contextPath}/image/i.jpg" style="display: block;"></a>
-									</li>
-									<li>
-										<a target="_blank"><img src="${pageContext.request.contextPath}/image/i.jpg" style="display: block;"></a>
-									</li>
+							<s:iterator var="p" value="#request.hotList">
+								<li>
+									<a target="_blank"><img src="${pageContext.request.contextPath}/${p.image}" data-original="http://storage.shopxx.net/demo-image/3.0/201301/0ff130db-0a1b-4b8d-a918-ed9016317009-thumbnail.jpg" style="display: block;"></a>
+								</li>
+							</s:iterator>
 						</ul>
 						<ul class="tabContent" style="display: none;">
 									<li>
@@ -239,56 +121,11 @@
 						</div>
 						 -->						
 						 <ul class="tabContent" style="display: block;">
-									<li>
-										<a  target="_blank"><img src="${pageContext.request.contextPath}/image/l.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/4a51167a-89d5-4710-aca2-7c76edc355b8-thumbnail.jpg" style="display: block;"></a>									</li>
-									<li>
-										<a  target="_blank"><img src="${pageContext.request.contextPath}/image/m.jpg" style="display: block;"></a>									</li>
-									
-									<li>
-										<a target="_blank"><img src="${pageContext.request.contextPath}/image/n.jpg" style="display: block;"></a>									</li>
-									<li>
-										<a target="_blank"><img src="${pageContext.request.contextPath}/image/o.jpg" style="display: block;"></a>									</li>
-									<li>
-										<a target="_blank"><img src="${pageContext.request.contextPath}/image/p.jpg" style="display: block;"></a>									</li>
-									<li>
-										<a target="_blank"><img src="${pageContext.request.contextPath}/image/m.jpg" style="display: block;"></a>									</li>
-									<li>
-										<a  target="_blank"><img src="${pageContext.request.contextPath}/image/15.jpg" style="display: block;"></a>
-									<li>
-										<a  target="_blank"><img src="${pageContext.request.contextPath}/image/l.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/b499fb5e-999f-431b-a375-172ee09e4a3e-thumbnail.jpg" style="display: block;" /></a>
-									</li>
-									<li>
-										<a  target="_blank"><img src="${pageContext.request.contextPath}/image/l.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/b499fb5e-999f-431b-a375-172ee09e4a3e-thumbnail.jpg" style="display: block;" /></a>
-									</li>
-									<li>
-										<a  target="_blank"><img src="${pageContext.request.contextPath}/image/l.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/b499fb5e-999f-431b-a375-172ee09e4a3e-thumbnail.jpg" style="display: block;" /></a>
-									</li>
-						</ul>
-						<ul class="tabContent" style="display: none;">
-									<li>
-										<a  target="_blank"><img src="./Mango商城 - Powered By Mango Team_files/b04a22f5-267d-4e33-ac58-dda941eeaf84-thumbnail.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/b04a22f5-267d-4e33-ac58-dda941eeaf84-thumbnail.jpg" style="display: block;"></a>
-									</li>
-									<li>
-										<a  target="_blank"><img src="./Mango商城 - Powered By Mango Team_files/ca3043f5-dbb0-4a03-9bb6-8274f78b5d7e-thumbnail.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/ca3043f5-dbb0-4a03-9bb6-8274f78b5d7e-thumbnail.jpg" style="display: block;"></a>
-									</li>
-									<li>
-										<a  target="_blank"><img src="./Mango商城 - Powered By Mango Team_files/a2ac0816-37e4-477a-b179-e64f71252cf5-thumbnail.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/a2ac0816-37e4-477a-b179-e64f71252cf5-thumbnail.jpg" style="display: block;"></a>
-									</li>
-									<li>
-										<a  target="_blank"><img src="./Mango商城 - Powered By Mango Team_files/fbb80ec8-a1d3-49de-b83b-79eae4b1ff69-thumbnail.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/fbb80ec8-a1d3-49de-b83b-79eae4b1ff69-thumbnail.jpg" style="display: block;"></a>
-									</li>
-									<li>
-										<a target="_blank"><img src="./Mango商城 - Powered By Mango Team_files/bb99deac-0b33-48f1-a3ad-e8310516be07-thumbnail.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/bb99deac-0b33-48f1-a3ad-e8310516be07-thumbnail.jpg" style="display: block;"></a>
-									</li>
-									<li>
-										<a target="_blank"><img src="./Mango商城 - Powered By Mango Team_files/7b3c0647-1016-4d13-8b84-4d63818e1179-thumbnail.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/7b3c0647-1016-4d13-8b84-4d63818e1179-thumbnail.jpg" style="display: block;"></a>
-									</li>
-									<li>
-										<a  target="_blank"><img src="./Mango商城 - Powered By Mango Team_files/3c79f82f-f136-48aa-9e81-7e10fbb3de2a-thumbnail.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/3c79f82f-f136-48aa-9e81-7e10fbb3de2a-thumbnail.jpg" style="display: block;"></a>
-									</li>
-									<li>
-										<a target="_blank"><img src="./Mango商城 - Powered By Mango Team_files/b998f840-91fc-41b6-b73d-70587babf760-thumbnail.jpg" data-original="http://storage.shopxx.net/demo-image/3.0/201301/b998f840-91fc-41b6-b73d-70587babf760-thumbnail.jpg" style="display: block;"></a>
-									</li>
+						 	<s:iterator var="n" value="#request.newList">
+								<li>
+									<a  target="_blank"><img src="${pageContext.request.contextPath}/${n.image}" data-original="http://storage.shopxx.net/demo-image/3.0/201301/4a51167a-89d5-4710-aca2-7c76edc355b8-thumbnail.jpg" style="display: block;"></a>
+								</li>
+							</s:iterator>
 						</ul>
 						<ul class="tabContent" style="display: none;">
 									<li>
