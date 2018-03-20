@@ -23,6 +23,7 @@ public class ProductAction extends ActionSupport implements RequestAware,ModelDr
 	private CategoryService categoryService;
 	
 	private Integer cid;
+	private Integer csid;
 	private Integer page;	//页数
 	private Product product = new Product();
 	
@@ -36,6 +37,10 @@ public class ProductAction extends ActionSupport implements RequestAware,ModelDr
 		this.cid = cid;
 	}
 	
+	public void setCsid(Integer csid) {
+		this.csid = csid;
+	}
+
 	public void setCategoryService(CategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
@@ -86,6 +91,24 @@ public class ProductAction extends ActionSupport implements RequestAware,ModelDr
 		//可以不必存至request域中，有模型驱动，前台可以使用 model.属性名 来取值
 		
 		return "findById";
+	}
+	
+	/**
+	 * 查询二级分类对应的商品
+	 * @return
+	 */
+	public String findByCsid() {
+		
+		//查询出全部一级分类与二级分类
+		List<Category> caList = categoryService.findAll();
+		request.put("caList", caList);
+		request.put("csid", csid);
+		
+		//查询二级分类对应的商品，也需要做分页
+		PageBean<Product> pageList = productService.findByCsid(csid,page);
+		request.put("pageList", pageList);
+		
+		return "findByCsid";
 	}
 
 }

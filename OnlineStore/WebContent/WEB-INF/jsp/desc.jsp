@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>京华亿家--大冬瓜</title>
+	<title>笨张张商品详情</title>
 	<meta name="author" content="Mango Team">
 	<meta name="copyright" content="Mango">
 		<meta name="keywords" content="京华亿家--大冬瓜">
@@ -33,7 +33,7 @@
 						<!-- 二级分类 -->
 						<s:iterator var="cas" value="#ca.categorySeconds">
 							<dd>
-								<a>${cas.csname}</a>
+								<a href="${pageContext.request.contextPath }/product_findByCsid?csid=${cas.csid}&page=1">${cas.csname}</a>
 							</dd>
 						</s:iterator>
 					</dl>
@@ -46,7 +46,7 @@
 						<!-- 二级分类 -->
 						<s:iterator var="cas" value="#ca.categorySeconds">
 							<dd>
-								<a href="${pageContext.request.contextPath }">${cas.csname}</a>
+								<a href="${pageContext.request.contextPath }/product_findByCsid?csid=${cas.csid}&page=1">${cas.csname}</a>
 							</dd>
 						</s:iterator>
 					</dl>

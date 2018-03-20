@@ -50,7 +50,7 @@ public class ProductService {
 		
 		//总页数
 		int totalPage = 0;
-		if(total / limit == 0) {
+		if(total % limit == 0) {
 			totalPage = total / limit;
 		}else {
 			totalPage = (total / limit) + 1;
@@ -70,6 +70,38 @@ public class ProductService {
 	 */
 	public Product findById(int pid) {
 		return productDao.findById(pid);
+	}
+
+	/**
+	 * 查询二级分类对应的商品
+	 * @param csid
+	 * @param page
+	 * @return
+	 */
+	public PageBean<Product> findByCsid(Integer csid, Integer page) {
+		PageBean<Product> pageBean = new PageBean<Product>();
+		pageBean.setPage(page);	//页数
+		int limit = 8;		//每页个数
+		pageBean.setLimit(limit);
+		
+		//查询总记录数
+		int total = productDao.findTotalByCsid(csid);
+		pageBean.setTotal(total);
+		
+		//总页数
+		int totalPage = 0;
+		if(total % limit == 0) {
+			totalPage = total / limit;
+		}else {
+			totalPage = (total / limit) + 1;
+		}
+		pageBean.setTotalPage(totalPage);
+		
+		//查询一级分类的商品
+		List<Product> list = productDao.findByCsid(csid,page,limit);
+		pageBean.setList(list);
+		
+		return pageBean;
 	}
 	
 }

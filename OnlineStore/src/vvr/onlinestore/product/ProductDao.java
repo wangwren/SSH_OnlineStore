@@ -85,4 +85,31 @@ public class ProductDao extends HibernateDaoSupport {
 	public Product findById(int pid) {
 		return this.getHibernateTemplate().get(Product.class, pid);
 	}
+
+	/**
+	 * 查询二级分类下对应的商品总数
+	 * @param csid
+	 * @return
+	 */
+	public int findTotalByCsid(Integer csid) {
+		List<Long> list = this.getHibernateTemplate().find("select count(*) from Product p,CategorySecond cs where p.categorySecond=cs and cs.csid=?", csid);
+		int total = list.get(0).intValue();
+		return total;
+	}
+
+	/**
+	 * 查询二级分类下对应的商品
+	 * @param csid
+	 * @param page
+	 * @param limit
+	 * @return
+	 */
+	public List<Product> findByCsid(Integer csid, Integer page, int limit) {
+		
+		String hql = "select p from Product p,CategorySecond cs where p.categorySecond=cs and cs.csid=?";
+		int start = (page - 1) * limit;
+		List<Product> list = this.getHibernateTemplate().executeFind(new PageHibernateCallback<Product>(hql, new Object[]{csid}, start, limit));
+		
+		return list;
+	}
 }

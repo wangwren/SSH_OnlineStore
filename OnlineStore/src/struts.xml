@@ -41,8 +41,12 @@
 		
 		<!-- 前台分类显示与数据显示 -->
 		<action name="product_*" class="productAction" method="{1}">
+			<!-- 一级分类下所有商品 -->
 			<result name="findByCid">/WEB-INF/jsp/list.jsp</result>
+			<!-- 商品详细信息 -->
 			<result name="findById">/WEB-INF/jsp/desc.jsp</result>
+			<!-- 二级分类下所有商品 -->
+			<result name="findByCsid">/WEB-INF/jsp/cslist.jsp</result>
 		</action>
     </package>
 

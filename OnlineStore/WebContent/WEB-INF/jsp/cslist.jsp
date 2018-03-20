@@ -24,33 +24,28 @@
 		<div class="span6">
 			<div class="hotProductCategory">
 			<s:iterator var="ca" value="#request.caList">
-				<s:if test="#request.cid==#ca.cid">
+				
 					<dl>
 						<dt>
 						<!-- 一级分类 -->
-							<a href="${pageContext.request.contextPath }/product_findByCid?cid=${ca.cid}&page=1" style="color:red">${ca.cname}</a>
-						</dt>
-						<!-- 二级分类 -->
-						<s:iterator var="cas" value="#ca.categorySeconds">
-							<dd>
-								<a href="${pageContext.request.contextPath }/product_findByCsid?csid=${cas.csid}&page=1">${cas.csname}</a>
-							</dd>
-						</s:iterator>
-					</dl>
-				</s:if>
-				<s:else>
-					<dl>
-						<dt>
 							<a href="${pageContext.request.contextPath }/product_findByCid?cid=${ca.cid}&page=1">${ca.cname}</a>
 						</dt>
 						<!-- 二级分类 -->
 						<s:iterator var="cas" value="#ca.categorySeconds">
-							<dd>
-								<a href="${pageContext.request.contextPath }/product_findByCsid?csid=${cas.csid}&page=1">${cas.csname}</a>
-							</dd>
+							<s:if test="#cas.csid==#request.csid">
+								<dd>
+									<a href="${pageContext.request.contextPath }/product_findByCsid?csid=${cas.csid}&page=1" style="color:red">${cas.csname}</a>
+								</dd>
+							</s:if>
+							<s:else>
+								<dd>
+									<a href="${pageContext.request.contextPath }/product_findByCsid?csid=${cas.csid}&page=1">${cas.csname}</a>
+								</dd>
+							</s:else>
 						</s:iterator>
 					</dl>
-				</s:else>
+				
+				
 			</s:iterator>
 			</div>
 		</div>
@@ -88,21 +83,21 @@
 				<div class="pagination">
 					第  <s:property value="#request.pageList.page"/>/<s:property value="#request.pageList.totalPage"/>页
 					<s:if test="#request.pageList.page != 1">
-						<a href="${ pageContext.request.contextPath }/product_findByCid.action?cid=${cid}&page=1" class="firstPage">&nbsp;</a>		
-						<a href="${ pageContext.request.contextPath }/product_findByCid.action?cid=${cid}&page=${pageList.page-1}" class="previousPage">&nbsp;</a>	
+						<a href="${ pageContext.request.contextPath }/product_findByCsid.action?csid=${csid}&page=1" class="firstPage">&nbsp;</a>		
+						<a href="${ pageContext.request.contextPath }/product_findByCsid.action?cid=${csid}&page=${pageList.page-1}" class="previousPage">&nbsp;</a>	
 					</s:if>	
 					<s:iterator var="i" begin="1" end="#request.pageList.totalPage" step="1">
 						<s:if test="#request.pageList.page==#i">
 							<span class="currentPage"><s:property value="#i"/></span>
 						</s:if>
 						<s:else>
-							<a href="${ pageContext.request.contextPath }/product_findByCid.action?cid=${cid }&page=<s:property value="#i"/>"><s:property value="#i"/></a>
+							<a href="${ pageContext.request.contextPath }/product_findByCsid.action?csid=${csid }&page=<s:property value="#i"/>"><s:property value="#i"/></a>
 						</s:else>
 					</s:iterator>
 						
 					<s:if test="#request.pageList.page != #request.pageList.totalPage">
-						<a class="nextPage" href="${ pageContext.request.contextPath }/product_findByCid.action?cid=${cid }&page=${pageList.page+1}">&nbsp;</a>
-						<a class="lastPage" href="${ pageContext.request.contextPath }/product_findByCid.action?cid=${cid }&page=${pageList.totalPage }">&nbsp;</a>
+						<a class="nextPage" href="${ pageContext.request.contextPath }/product_findByCsid.action?csid=${csid }&page=${pageList.page+1}">&nbsp;</a>
+						<a class="lastPage" href="${ pageContext.request.contextPath }/product_findByCsid.action?csid=${csid }&page=${pageList.totalPage }">&nbsp;</a>
 					</s:if>
 				</div>
 			</form>
