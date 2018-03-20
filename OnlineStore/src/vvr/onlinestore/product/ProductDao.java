@@ -8,6 +8,8 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import vvr.onlinestore.utils.PageHibernateCallback;
+
 public class ProductDao extends HibernateDaoSupport {
 
 	/**
@@ -40,4 +42,47 @@ public class ProductDao extends HibernateDaoSupport {
 		return list;
 	}
 
+	/**
+	 * 查询一级分类对应的商品总记录数
+	 * @return
+	 */
+	public int findTotal(Integer cid) {
+		
+		//多表查询
+		List<Long> list = this.getHibernateTemplate().find("select count(*) from Product p,CategorySecond cs where p.categorySecond=cs and cs.category.cid=?",cid);
+
+		int total = list.get(0).intValue();
+		
+		return total;
+	}
+
+	/**
+	 * 查询一级分类对应的全部商品
+	 * @param cid
+	 * @param page
+	 * @param limit
+	 * @return
+	 */
+	public List<Product> findProductToCid(Integer cid, Integer page, int limit) {
+		
+		String hql = "select p from Product p,CategorySecond cs where p.categorySecond=cs and cs.category.cid=?";
+		Object[] params = {cid};
+		int start = (page - 1) * limit;
+		
+		//又一种分页查询，调用executeFind方法，自己编写继承HibernateCallback的类
+		List<Product> list = this.getHibernateTemplate().executeFind(new PageHibernateCallback<Product>(hql, params, start, limit));
+		if(list.size() > 0) {
+			return list;
+		}
+		
+		return null;
+	}
+
+	/**
+	 * 查询某个商品的详细信息
+	 * @return
+	 */
+	public Product findById(int pid) {
+		return this.getHibernateTemplate().get(Product.class, pid);
+	}
 }

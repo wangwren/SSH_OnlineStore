@@ -42,6 +42,7 @@
 		<!-- 前台分类显示与数据显示 -->
 		<action name="product_*" class="productAction" method="{1}">
 			<result name="findByCid">/WEB-INF/jsp/list.jsp</result>
+			<result name="findById">/WEB-INF/jsp/desc.jsp</result>
 		</action>
     </package>
 

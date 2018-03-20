@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>蔬菜 - Powered By Mango Team</title>
+	<title>笨张张商品</title>
 	<meta name="author" content="Mango Team">
 	<meta name="copyright" content="Mango">
 	<meta name="keywords" content="蔬菜">
 	<meta name="description" content="蔬菜">
-	<link href="./css/common.css" rel="stylesheet" type="text/css">
-	<link href="./css/product.css" rel="stylesheet" type="text/css">
+	<link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet" type="text/css">
+	<link href="${pageContext.request.contextPath}/css/product.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="container header">
@@ -27,8 +27,10 @@
 				<s:if test="#request.cid==#ca.cid">
 					<dl>
 						<dt>
+						<!-- 一级分类 -->
 							<a href="${pageContext.request.contextPath }/product_findByCid?cid=${ca.cid}&page=1" style="color:red">${ca.cname}</a>
 						</dt>
+						<!-- 二级分类 -->
 						<s:iterator var="cas" value="#ca.categorySeconds">
 							<dd>
 								<a>${cas.csname}</a>
@@ -41,9 +43,10 @@
 						<dt>
 							<a href="${pageContext.request.contextPath }/product_findByCid?cid=${ca.cid}&page=1">${ca.cname}</a>
 						</dt>
+						<!-- 二级分类 -->
 						<s:iterator var="cas" value="#ca.categorySeconds">
 							<dd>
-								<a >${cas.csname}</a>
+								<a href="${pageContext.request.contextPath }">${cas.csname}</a>
 							</dd>
 						</s:iterator>
 					</dl>
@@ -53,46 +56,62 @@
 		</div>
 		<div class="span18 last">
 			
-			<form id="productForm" action="./image/蔬菜 - Powered By Mango Team.htm" method="get">
+			<form id="productForm" action="${pageContext.request.contextPath}/image/蔬菜 - Powered By Mango Team.htm" method="get">
 				<input type="hidden" id="brandId" name="brandId" value="">
 				<input type="hidden" id="promotionId" name="promotionId" value="">
 				<input type="hidden" id="orderType" name="orderType" value="">
 				<input type="hidden" id="pageNumber" name="pageNumber" value="1">
 				<input type="hidden" id="pageSize" name="pageSize" value="20">
-					
+				
+				<!-- 商品 -->
 				<div id="result" class="result table clearfix">
+					<s:iterator var="p" value="#request.pageList.list">
 						<ul>
 							<li>
-								<a href="./京华亿家分页面.htm">
-									<img src="./image/4a51167a-89d5-4710-aca2-7c76edc355b8-thumbnail.jpg" width="170" height="170"  style="display: inline-block;">
+								<a href="${pageContext.request.contextPath }/product_findById.action?pid=${p.pid}">
+									<img src="${pageContext.request.contextPath }/${p.image}" width="170" height="170"  style="display: inline-block;">
 									   
 									<span style='color:green'>
-									 大冬瓜
+									 ${p.pname}
 									</span>
 									 
 									<span class="price">
-										亿家价： ￥4.78/份
+										笨张价： ￥${p.shop_price}
 									</span>
 								</a>
 							</li>
 						</ul>
+					</s:iterator>
 				</div>
-	<div class="pagination">
-			<span class="firstPage">&nbsp;</span>
-			<span class="previousPage">&nbsp;</span>
-				<span class="currentPage">1</span>
-				<a href="javascript: $.pageSkip(2);">2</a>
-			<a class="nextPage" href="javascript: $.pageSkip(2);">&nbsp;</a>
-			
-			<a class="lastPage" href="javascript: $.pageSkip(2);">&nbsp;</a>
-	</div>
+				
+				<!-- 分页 -->
+				<div class="pagination">
+					第  <s:property value="#request.pageList.page"/>/<s:property value="#request.pageList.totalPage"/>页
+					<s:if test="#request.pageList.page != 1">
+						<a href="${ pageContext.request.contextPath }/product_findByCid.action?cid=${cid}&page=1" class="firstPage">&nbsp;</a>		
+						<a href="${ pageContext.request.contextPath }/product_findByCid.action?cid=${cid}&page=${pageList.page-1}" class="previousPage">&nbsp;</a>	
+					</s:if>	
+					<s:iterator var="i" begin="1" end="#request.pageList.totalPage" step="1">
+						<s:if test="#request.pageList.page==#i">
+							<span class="currentPage"><s:property value="#i"/></span>
+						</s:if>
+						<s:else>
+							<a href="${ pageContext.request.contextPath }/product_findByCid.action?cid=${cid }&page=<s:property value="#i"/>"><s:property value="#i"/></a>
+						</s:else>
+					</s:iterator>
+						
+					<s:if test="#request.pageList.page != #request.pageList.totalPage">
+						<a class="nextPage" href="${ pageContext.request.contextPath }/product_findByCid.action?cid=${cid }&page=${pageList.page+1}">&nbsp;</a>
+						<a class="lastPage" href="${ pageContext.request.contextPath }/product_findByCid.action?cid=${cid }&page=${pageList.totalPage }">&nbsp;</a>
+					</s:if>
+				</div>
 			</form>
 		</div>
 	</div>
 <div class="container footer">
 	<div class="span24">
 		<div class="footerAd">
-					<img src="./image/footer.jpg" width="950" height="52" alt="我们的优势" title="我们的优势">
+					<img src="${pageContext.request.contextPath}/image/footer.jpg" width="950" height="52" alt="我们的优势" title="我们的优势">
 </div>	</div>
 	<div class="span24">
 		<ul class="bottomNav">
