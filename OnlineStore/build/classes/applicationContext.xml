@@ -90,6 +90,11 @@
 		<property name="categoryService" ref="categoryService"/>
 	</bean>
 	
+	<!-- 购物车 -->
+	<bean id="cartAction" class="vvr.onlinestore.cart.CartAction" scope="prototype">
+		<property name="productService" ref="productService"/>
+	</bean>
+	
 	
 	<!-- 配置service -->
 	<!-- 用户 -->

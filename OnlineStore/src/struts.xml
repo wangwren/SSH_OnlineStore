@@ -48,6 +48,14 @@
 			<!-- 二级分类下所有商品 -->
 			<result name="findByCsid">/WEB-INF/jsp/cslist.jsp</result>
 		</action>
+		
+		<!-- 购物车 -->
+		<action name="cart_*" class="cartAction" method="{1}">
+			<result name="addCartSuccess">/WEB-INF/jsp/cart.jsp</result>
+			<result name="clearCartSuccess">/WEB-INF/jsp/cart.jsp</result>
+			<result name="delSuccess">/WEB-INF/jsp/cart.jsp</result>
+			<result name="myCartSuccess">/WEB-INF/jsp/cart.jsp</result>
+		</action>
     </package>
 
 </struts>

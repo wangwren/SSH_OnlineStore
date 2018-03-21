@@ -14,7 +14,9 @@
 
 </head>
 <body>
-
+<form action="${pageContext.request.contextPath }/cart_addCart.action" method="post">
+<!-- 隐藏字段，保存商品的id -->
+<input type="hidden" name="pid" value="${model.pid }"/>
 <div class="container header">
 	<%@ include file="header.jsp" %>
 	<%@ include file="menu.jsp" %>
@@ -103,18 +105,18 @@
 						<dl class="quantity">
 							<dt>购买数量:</dt>
 							<dd>
-								<input id="quantity" name="quantity" value="1" maxlength="4" onpaste="return false;" type="text">
-								<div>
+								<input id="quantity" name="count" value="1" maxlength="4" onpaste="return false;" type="text">
+								<%-- <div>
 									<span id="increase" class="increase">&nbsp;</span>
 									<span id="decrease" class="decrease">&nbsp;</span>
-								</div>
+								</div> --%>
 							</dd>
 							<dd>
 								件
 							</dd>
 						</dl>
 					<div class="buy">
-							<input id="addCart" class="addCart" value="加入购物车" type="button">
+							<input id="addCart" class="addCart" value="加入购物车" type="submit">
 				
 					</div>
 				</div>
@@ -190,5 +192,6 @@
 		<div class="copyright">Copyright © 2005-2013 Mango商城 版权所有</div>
 	</div>
 </div>
+</form>
 </body>
 </html>
