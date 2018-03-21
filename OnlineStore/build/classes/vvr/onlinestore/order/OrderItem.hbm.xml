@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="vvr.onlinestore.order.OrderItem" table="orderitem">
+		<id name="itemid" column="itemid">
+			<generator class="native"/>
+		</id>
+		
+		<property name="count" column="count"/>
+		<property name="subtotal" column="subtotal"/>
+		
+		<many-to-one name="product" class="vvr.onlinestore.product.Product" column="pid" lazy="false"/>
+		
+		<!-- 配置订单项所属订单 -->
+		<many-to-one name="orders" class="vvr.onlinestore.order.Orders" column="oid"></many-to-one>
+	</class>
+
+</hibernate-mapping>

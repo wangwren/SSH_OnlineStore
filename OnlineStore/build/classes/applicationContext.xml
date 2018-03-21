@@ -48,6 +48,8 @@
 				<value>vvr/onlinestore/category/Category.hbm.xml</value>
 				<value>vvr/onlinestore/product/Product.hbm.xml</value>
 				<value>vvr/onlinestore/categorysecond/CategorySecond.hbm.xml</value>
+				<value>vvr/onlinestore/order/Orders.hbm.xml</value>
+				<value>vvr/onlinestore/order/OrderItem.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
