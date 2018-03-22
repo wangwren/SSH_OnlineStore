@@ -56,6 +56,14 @@
 			<result name="delSuccess">/WEB-INF/jsp/cart.jsp</result>
 			<result name="myCartSuccess">/WEB-INF/jsp/cart.jsp</result>
 		</action>
+		
+		<!-- 订单 -->
+		<action name="order_*" class="orderAction" method="{1}">
+			<!-- 购物车为空或未登录 -->
+			<result name="saveOrderError">/WEB-INF/jsp/msg.jsp</result>
+			<!-- 订单生成成功 -->
+			<result name="saveOrderSuccess">/WEB-INF/jsp/order.jsp</result>
+		</action>
     </package>
 
 </struts>

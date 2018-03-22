@@ -97,6 +97,11 @@
 		<property name="productService" ref="productService"/>
 	</bean>
 	
+	<!-- 订单 -->
+	<bean id="orderAction" class="vvr.onlinestore.order.OrdersAction" scope="prototype">
+		<property name="ordersService" ref="orderService"/>
+	</bean>
+	
 	
 	<!-- 配置service -->
 	<!-- 用户 -->
@@ -114,6 +119,10 @@
 		<property name="productDao" ref="productDao"/>
 	</bean>
 	
+	<!-- 订单 -->
+	<bean id="orderService" class="vvr.onlinestore.order.OrdersService">
+		<property name="orderDao" ref="orderDao"/>
+	</bean>
 	
 	<!-- 配置Dao -->
 	<!-- 用户 -->
@@ -128,6 +137,11 @@
 	
 	<!-- 商品 -->
 	<bean id="productDao" class="vvr.onlinestore.product.ProductDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 订单 -->
+	<bean id="orderDao" class="vvr.onlinestore.order.OrdersDao">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 </beans>

@@ -17,7 +17,8 @@
 <div class="container header">
 	<%@ include file="header.jsp" %>
 	<%@ include file="menu.jsp" %>
-</div>	<div class="container cart">
+</div>	
+	<div class="container cart">
 		<div class="span24">
 			<s:if test="#session.cart==null || #session.cart.cartItems.size()==0">
 				<div class="step step1">
@@ -73,7 +74,7 @@
 				</div>
 				<div class="bottom">
 					<a href="${pageContext.request.contextPath }/cart_clearCart.action" id="clear" class="clear">清空购物车</a>
-					<a href="./会员登录.htm" id="submit" class="submit">提交订单</a>
+					<a href="${pageContext.request.contextPath }/order_saveOrder.action" id="submit" class="submit">提交订单</a>
 				</div>
 			</s:else>
 		</div>
