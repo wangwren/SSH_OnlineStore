@@ -73,7 +73,7 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 			order.getOrderItems().add(oitem);
 		}
 		
-		//保存订单
+		//保存订单；
 		Integer oid = ordersService.saveOrder(order);
 		//保存成功后，再将oid设置到order对象中，方便显示，不用再去查数据库
 		order.setOid(oid);

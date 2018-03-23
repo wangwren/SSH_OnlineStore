@@ -11,6 +11,7 @@
 		
 		<property name="total" column="total"/>
 		<property name="ordertime" column="ordertime"/>
+		<property name="state" column="state"/>
 		<property name="addr" column="addr"/>
 		<property name="phone" column="phone"/>
 		
