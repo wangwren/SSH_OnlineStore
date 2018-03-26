@@ -1,8 +1,12 @@
 package vvr.onlinestore.order;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -11,6 +15,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import vvr.onlinestore.cart.Cart;
 import vvr.onlinestore.cart.CartItem;
 import vvr.onlinestore.user.User;
+import vvr.onlinestore.utils.PaymentUtil;
 
 public class OrdersAction extends ActionSupport implements SessionAware,RequestAware{
 
@@ -20,8 +25,23 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 	private Map<String,Object> request;
 	private Orders order;
 	
+	//支付通道编码
+	private String pd_FrpId;
+	
+	//付款成功后需要的参数
+	private String r3_Amt;		//支付金额
+	private String r6_Order;	//商户订单号
+	
 	private OrdersService ordersService;
 	
+	public Orders getOrder() {
+		return order;
+	}
+
+	public void setOrder(Orders order) {
+		this.order = order;
+	}
+
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
@@ -32,6 +52,32 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 	
 	public void setOrdersService(OrdersService ordersService) {
 		this.ordersService = ordersService;
+	}
+	
+	
+
+	public String getR3_Amt() {
+		return r3_Amt;
+	}
+
+	public void setR3_Amt(String r3_Amt) {
+		this.r3_Amt = r3_Amt;
+	}
+
+	public String getR6_Order() {
+		return r6_Order;
+	}
+
+	public void setR6_Order(String r6_Order) {
+		this.r6_Order = r6_Order;
+	}
+	
+	public String getPd_FrpId() {
+		return pd_FrpId;
+	}
+
+	public void setPd_FrpId(String pd_FrpId) {
+		this.pd_FrpId = pd_FrpId;
 	}
 
 	/**
@@ -80,7 +126,79 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 		//清空购物车
 		cart.clear();
 		
+		//将order存至request域中
+		request.put("order", order);
+		
 		return "saveOrderSuccess";
 	}
 
+	/**
+	 * 实现支付功能
+	 * @return
+	 * @throws IOException 
+	 */
+	public String payOrder() throws IOException {
+		
+		//修改订单，将地址、收货人、联系方式添加至订单
+		Orders currOrder = ordersService.findByOid(order.getOid());
+		currOrder.setAddr(order.getAddr());
+		currOrder.setPhone(order.getPhone());
+		currOrder.setName(order.getName());
+		ordersService.update(currOrder);
+		
+		//支付，由于只能商户才能够完成支付的操作，所以这里使用传智播客提供的，如果你有商户编号，就可以完成支付，这里的商户编号不好使了。
+		//定义付款的参数
+		String p0_Cmd = "Buy";	//业务类型
+		String p1_MerId = "10001126856";	//商户编号
+		String p2_Order = order.getOid().toString();	//商户订单号
+		String p3_Amt = "0.01";		//支付金额
+		String p4_Cur = "CNY";		//交易币种
+		String p5_Pid = "";			//商品名称
+		String p6_Pcat = "";		//商品种类
+		String p7_Pdesc = "";		//商品描述
+		String p8_Url = "http://localhost:8080/OnlineStore/order_callBack.action";	//商户接收支付成功数据的地址
+		String p9_SAF = "";		//送货地址
+		String pa_MP = "";		//商户扩展信息
+		String pr_NeedResponse = "1";		//应答机制
+		String keyValue = "69cl522AV6q613Ii4W6u8K6XuW8vM1N6bFgyv769220IuYe9u37N4y7rI4Pl";
+		//签名数据
+		String hmac = PaymentUtil.buildHmac(p0_Cmd, p1_MerId, p2_Order, p3_Amt, p4_Cur, p5_Pid, p6_Pcat, p7_Pdesc, p8_Url, p9_SAF, pa_MP,pd_FrpId , pr_NeedResponse, keyValue);
+		
+		StringBuffer sb = new StringBuffer("https://www.yeepay.com/app-merchant-proxy/node?");
+		sb.append("p0_Cmd=").append(p0_Cmd).append("&");
+		sb.append("p1_MerId=").append(p1_MerId).append("&");
+		sb.append("p2_Order=").append(p2_Order).append("&");
+		sb.append("p3_Amt=").append(p3_Amt).append("&");
+		sb.append("p4_Cur=").append(p4_Cur).append("&");
+		sb.append("p5_Pid=").append(p5_Pid).append("&");
+		sb.append("p6_Pcat=").append(p6_Pcat).append("&");
+		sb.append("p7_Pdesc=").append(p7_Pdesc).append("&");
+		sb.append("p8_Url=").append(p8_Url).append("&");
+		sb.append("p9_SAF=").append(p9_SAF).append("&");
+		sb.append("pa_MP=").append(pa_MP).append("&");
+		sb.append("pd_FrpId=").append(pd_FrpId).append("&");
+		sb.append("pr_NeedResponse=").append(pr_NeedResponse).append("&");
+		sb.append("hmac=").append(hmac);
+		System.out.println(sb.toString());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.sendRedirect(sb.toString());
+		
+		return NONE;
+	}
+	
+	/**
+	 * 付款成功后的回调方法
+	 * @return
+	 */
+	public String callBack() {
+		
+		//修改订单状态
+		Orders currOrder = ordersService.findByOid(Integer.parseInt(r6_Order));
+		currOrder.setState(1);
+		ordersService.update(currOrder);
+		
+		request.put("message", "付款成功！订单号：" + r6_Order + "付款金额：" + r3_Amt);
+		
+		return "callBackSuccess";
+	}
 }

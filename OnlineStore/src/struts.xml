@@ -63,6 +63,8 @@
 			<result name="saveOrderError">/WEB-INF/jsp/msg.jsp</result>
 			<!-- 订单生成成功 -->
 			<result name="saveOrderSuccess">/WEB-INF/jsp/order.jsp</result>
+			<!-- 订单支付成功后跳转的页面 -->
+			<result name="callBackSuccess">/WEB-INF/jsp/msg.jsp</result>
 		</action>
     </package>
 

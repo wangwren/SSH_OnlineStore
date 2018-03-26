@@ -24,8 +24,9 @@
 			<div class="step step1">
 				<ul>
 					
-					<li  class="current"></li>
-					<li  >生成订单成功</li>
+					<li class="current"></li>
+					<li style="color: red">订单已生成！！！</li>
+					<li>订单编号：${order.oid }</li>
 				</ul>
 			</div>
 	
@@ -40,50 +41,49 @@
 						<th>小计</th>
 						<th>操作</th>
 					</tr>
-					
+					<s:iterator var="item" value="#request.order.orderItems">
 						<tr>
 							<td width="60">
-								<input type="hidden" name="id" value="22"/>
-								<img src=""/>
+								<input type="hidden" name="pid" value="${item.product.pid }"/>
+								<img src="${pageContext.request.contextPath }/${item.product.image}"/>
 							</td>
 							<td>
-								<a target="_blank"><s:property value="product.pname"/></a>
+								<a target="_blank">${item.product.pname}</a>
 							</td>
 							<td>
-								100
+								${item.product.shop_price}/元
 							</td>
 							<td class="quantity" width="60">
-								<input type="text" name="count" value="1" maxlength="4" onpaste="return false;"/>
-								<div>
-									<span class="increase">&nbsp;</span>
-									<span class="decrease">&nbsp;</span>
-								</div>
+								${item.count }
+								
 							</td>
 							<td width="140">
-								<span class="subtotal">￥100</span>
+								<span class="subtotal">￥${item.subtotal }</span>
 							</td>
 							<td>
 								<a href="./cart_removeCart.action?pid=1" class="delete">删除</a>
 							</td>
 						</tr>
-					
+					</s:iterator>
 				</tbody>
 			</table>
 				<dl id="giftItems" class="hidden" style="display: none;">
 				</dl>
 				<div class="total">
 					<em id="promotion"></em>
-					商品金额: <strong id="effectivePrice">￥100元</strong>
+					商品金额: <strong id="effectivePrice">￥${order.total }元</strong>
 				</div>
-			<form id="orderForm" action="./order_payOrder.action" method="post">
-				<input type="hidden" name="order.oid" value=""/>
+				
+				
+			<form id="orderForm" action="${pageContext.request.contextPath }/order_payOrder.action" method="post">
+				<input type="hidden" name="order.oid" value="${order.oid }"/>
 				<div class="span24">
 					<p>
-							收货地址：<input name="order.user.addr" type="text" value="" style="width:350px" />
+							收货地址：<input name="order.addr" type="text" value="${order.user.addr }" style="width:350px" />
 								<br />
-							收货人&nbsp;&nbsp;&nbsp;：<input name="order.user.username" type="text" value="" style="width:150px" />
+							收货人&nbsp;&nbsp;&nbsp;：<input name="order.name" type="text" value="${order.user.name }" style="width:150px" />
 								<br /> 
-							联系方式：<input name="order.user.phone" type="text"value="" style="width:150px" />
+							联系方式：<input name="order.phone" type="text"value="${order.user.phone }" style="width:150px" />
 
 						</p>
 						<hr />
@@ -116,6 +116,7 @@
 						</p>
 				</div>
 			</form>
+			
 		</div>
 		
 	</div>

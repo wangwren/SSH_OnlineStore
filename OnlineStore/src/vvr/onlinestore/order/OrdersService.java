@@ -22,4 +22,22 @@ public class OrdersService {
 		return orderDao.saveOrder(order);
 	}
 
+	/**
+	 * 通过指定订单编号查询订单
+	 * @param oid
+	 * @return
+	 */
+	public Orders findByOid(Integer oid) {
+		return orderDao.findByOid(oid);
+	}
+
+	/**
+	 * 修改订单
+	 * @param currOrder
+	 */
+	public void update(Orders currOrder) {
+
+		orderDao.update(currOrder);
+	}
+
 }

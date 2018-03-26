@@ -29,6 +29,7 @@ public class Orders {
 	private Date ordertime;
 	private int state;
 	private String addr;
+	private String name;
 	private Integer phone;
 	
 	private User user;
@@ -96,6 +97,14 @@ public class Orders {
 
 	public void setOrderItems(Set<OrderItem> orderItems) {
 		this.orderItems = orderItems;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

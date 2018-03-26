@@ -14,6 +14,7 @@
 		<property name="state" column="state"/>
 		<property name="addr" column="addr"/>
 		<property name="phone" column="phone"/>
+		<property name="name" column="name"/>
 		
 		<many-to-one name="user" class="vvr.onlinestore.user.User" column="uid"></many-to-one>
 		

@@ -17,4 +17,25 @@ public class OrdersDao extends HibernateDaoSupport{
 		return oid;
 	}
 
+	/**
+	 * 通过指定订单编号查询订单
+	 * @param oid
+	 * @return
+	 */
+	public Orders findByOid(Integer oid) {
+		
+		Orders order = this.getHibernateTemplate().get(Orders.class, oid);
+
+		return order;
+	}
+
+	/**
+	 * 修改订单
+	 * @param currOrder
+	 */
+	public void update(Orders currOrder) {
+
+		this.getHibernateTemplate().update(currOrder);
+	}
+
 }
