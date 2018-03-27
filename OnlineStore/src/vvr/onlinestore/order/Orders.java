@@ -15,7 +15,7 @@ import vvr.onlinestore.user.User;
   `ordertime` DATETIME DEFAULT NULL,
   `state` INT(11) DEFAULT NULL,
   `addr` VARCHAR(50) DEFAULT NULL,
-  `phone` INT(20) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
   `uid` INT(11) DEFAULT NULL,
   PRIMARY KEY (`oid`),
   KEY `FKC3DF62E5AA3D9C7` (`uid`),
@@ -30,7 +30,7 @@ public class Orders {
 	private int state;
 	private String addr;
 	private String name;
-	private Integer phone;
+	private String phone;
 	
 	private User user;
 	private Set<OrderItem> orderItems = new HashSet<OrderItem>();
@@ -75,11 +75,11 @@ public class Orders {
 		this.addr = addr;
 	}
 
-	public Integer getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
