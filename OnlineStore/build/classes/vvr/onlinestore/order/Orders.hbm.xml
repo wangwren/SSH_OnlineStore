@@ -18,6 +18,7 @@
 		
 		<many-to-one name="user" class="vvr.onlinestore.user.User" column="uid"></many-to-one>
 		
+		<!-- 同步 -->
 		<set name="orderItems" cascade="save-update" lazy="false">
 			<key column="oid"/>
 			<one-to-many class="vvr.onlinestore.order.OrderItem"/>

@@ -1,6 +1,10 @@
 package vvr.onlinestore.order;
 
+import java.util.List;
+
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import vvr.onlinestore.user.User;
 
 public class OrdersDao extends HibernateDaoSupport{
 
@@ -36,6 +40,20 @@ public class OrdersDao extends HibernateDaoSupport{
 	public void update(Orders currOrder) {
 
 		this.getHibernateTemplate().update(currOrder);
+	}
+
+	/**
+	 * 查询用户订单
+	 * @param user
+	 * @return
+	 */
+	public List<Orders> findByUid(User user) {
+		
+		List<Orders> list = this.getHibernateTemplate().find("from Orders o where o.user.uid=?", user.getUid());
+		if(list.size() > 0) {
+			return list;
+		}
+		return null;
 	}
 
 }

@@ -19,6 +19,9 @@
 					<li id="headerLogin" class="headerLogin" style="display: list-item;">
 						<s:property value="#session.user.username"/>|
 					</li>
+					<li id="headerLogin" class="headerLogin" style="display: list-item;">
+						<a href="${pageContext.request.contextPath }/order_findMyOrder.action">我的订单</a>||
+					</li>
 					<li id="headerRegister" class="headerRegister" style="display: list-item;">
 						<a href="${pageContext.request.contextPath }/user_quit.action">注销</a>|
 					</li>

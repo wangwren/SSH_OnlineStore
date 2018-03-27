@@ -65,6 +65,10 @@
 			<result name="saveOrderSuccess">/WEB-INF/jsp/order.jsp</result>
 			<!-- 订单支付成功后跳转的页面 -->
 			<result name="callBackSuccess">/WEB-INF/jsp/msg.jsp</result>
+			<!-- 用户查询自己的订单 -->
+			<result name="findMyOrderSuccess">/WEB-INF/jsp/orderlist.jsp</result>
+			<!-- 查询未付款的订单 -->
+			<result name="findByOidSuccess">/WEB-INF/jsp/order.jsp</result>
 		</action>
     </package>
 

@@ -2,6 +2,7 @@ package vvr.onlinestore.order;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +33,8 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 	private String r3_Amt;		//支付金额
 	private String r6_Order;	//商户订单号
 	
+	private Integer oid;
+	
 	private OrdersService ordersService;
 	
 	public Orders getOrder() {
@@ -54,7 +57,13 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 		this.ordersService = ordersService;
 	}
 	
-	
+	public Integer getOid() {
+		return oid;
+	}
+
+	public void setOid(Integer oid) {
+		this.oid = oid;
+	}
 
 	public String getR3_Amt() {
 		return r3_Amt;
@@ -200,5 +209,28 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 		request.put("message", "付款成功！订单号：" + r6_Order + "付款金额：" + r3_Amt);
 		
 		return "callBackSuccess";
+	}
+	
+	/**
+	 * 通过用户id查询用户的订单
+	 * @return
+	 */
+	public String findMyOrder() {
+		
+		User user = (User) session.get("user");
+		List<Orders> orders = ordersService.findByUid(user);
+		request.put("orders", orders);
+		return "findMyOrderSuccess";
+	}
+	
+	/**
+	 * 查询订单列表中未付款的订单，跳转至付款
+	 * @return
+	 */
+	public String findByOid() {
+		
+		order = ordersService.findByOid(oid);
+		request.put("order", order);
+		return "findByOidSuccess";
 	}
 }
