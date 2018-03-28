@@ -8,6 +8,8 @@
     <constant name="struts.devMode" value="false" />
 
     <package name="default" namespace="/" extends="struts-default">
+    
+    	<!-- =================前台====================== -->
     	<!-- 首页 -->
 		<action name="index" class="indexAction">
 			<result name="indexSuccess">/WEB-INF/jsp/index.jsp</result>
@@ -33,11 +35,6 @@
 		
 		<!-- 验证码生成器 -->
 		<action name="checkImg" class="checkImg"></action>
-		
-		<!-- 一级分类 -->
-		<action name="category_*" class="categoryAction" method="{1}">
-		
-		</action>
 		
 		<!-- 前台分类显示与数据显示 -->
 		<action name="product_*" class="productAction" method="{1}">
@@ -69,6 +66,29 @@
 			<result name="findMyOrderSuccess">/WEB-INF/jsp/orderlist.jsp</result>
 			<!-- 查询未付款的订单 -->
 			<result name="findByOidSuccess">/WEB-INF/jsp/order.jsp</result>
+		</action>
+		
+		
+		<!-- =================后台====================== -->
+		<!-- 后台用户登录 -->
+		<action name="adminUser_*" class="adminUserAction" method="{1}">
+			<!-- 登录失败 -->
+			<result name="input">/admin/index.jsp</result>
+			<!-- 登录成功 -->
+			<result name="loginSuccess" type="redirect">/admin/home.jsp</result>
+		</action>
+		
+		<action name="category_*" class="categoryAction" method="{1}">
+			<!-- 后台查询一级分类 -->
+			<result name="adminFindAllSuccess">/admin/category/list.jsp</result>
+			<!-- 后台添加一级分类 -->
+			<result name="adminSave" type="redirectAction">category_adminFindAll</result>
+			<!-- 后台删除一级分类 -->
+			<result name="deleteSuccess" type="redirectAction">category_adminFindAll</result>
+			<!-- 后台查询指定一级分类 -->
+			<result name="adminFindByCidSuccess">/admin/category/edit.jsp</result>
+			<!-- 后台修改指定一级分类 -->
+			<result name="adminUpdateSuccess" type="redirectAction">category_adminFindAll</result>
 		</action>
     </package>
 

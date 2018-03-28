@@ -50,6 +50,7 @@
 				<value>vvr/onlinestore/categorysecond/CategorySecond.hbm.xml</value>
 				<value>vvr/onlinestore/order/Orders.hbm.xml</value>
 				<value>vvr/onlinestore/order/OrderItem.hbm.xml</value>
+				<value>vvr/onlinestore/admin/adminuser/AdminUser.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -67,6 +68,7 @@
 	
 	
 	<!-- 配置action -->
+	<!-- =====================前台======================= -->
 	<!-- 首页 -->
 	<bean id="indexAction" class="vvr.onlinestore.index.IndexAction" scope="prototype">
 		<property name="categoryService" ref="categoryService"/>
@@ -102,8 +104,15 @@
 		<property name="ordersService" ref="orderService"/>
 	</bean>
 	
+	<!-- =====================后台======================= -->
+	<bean id="adminUserAction" class="vvr.onlinestore.admin.adminuser.AdminUserAction" scope="prototype">
+		<property name="adminUserService" ref="adminUserService"/>
+	</bean>
+	
 	
 	<!-- 配置service -->
+	
+	<!-- =====================前台======================= -->
 	<!-- 用户 -->
 	<bean id="userService" class="vvr.onlinestore.user.UserService">
 		<property name="userDao" ref="userDao" />
@@ -124,7 +133,16 @@
 		<property name="orderDao" ref="orderDao"/>
 	</bean>
 	
+	<!-- =====================后台======================= -->
+	<!-- 后台用户 -->
+	<bean id="adminUserService" class="vvr.onlinestore.admin.adminuser.AdminUserService">
+		<property name="adminUserDao" ref="adminUserDao"/>
+	</bean>
+	
+	
 	<!-- 配置Dao -->
+	
+	<!-- =====================前台======================= -->
 	<!-- 用户 -->
 	<bean id="userDao" class="vvr.onlinestore.user.UserDao">
 		<property name="sessionFactory" ref="sessionFactory"/>
@@ -142,6 +160,12 @@
 	
 	<!-- 订单 -->
 	<bean id="orderDao" class="vvr.onlinestore.order.OrdersDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- =====================后台======================= -->
+	<!-- 后台用户 -->
+	<bean id="adminUserDao" class="vvr.onlinestore.admin.adminuser.AdminUserDao">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 </beans>

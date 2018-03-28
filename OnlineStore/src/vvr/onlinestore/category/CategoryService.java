@@ -20,5 +20,38 @@ public class CategoryService {
 	public List<Category> findAll() {
 		return categoryDao.findAll();
 	}
+
+	/**
+	 * 后台添加一级分类
+	 * @param category
+	 */
+	public void save(Category category) {
+		categoryDao.save(category);
+	}
+
+	/**
+	 * 后台删除一级分类
+	 * @param category
+	 */
+	public void delete(Category category) {
+		categoryDao.delete(category);
+	}
+
+	/**
+	 * 后台查询指定一级分类
+	 * @param category
+	 * @return
+	 */
+	public Category findByCid(Integer cid) {
+		return categoryDao.findByCid(cid);
+	}
+
+	/**
+	 * 后台修改一级分类
+	 * @param category
+	 */
+	public void update(Category category) {
+		categoryDao.update(category);
+	}
 	
 }

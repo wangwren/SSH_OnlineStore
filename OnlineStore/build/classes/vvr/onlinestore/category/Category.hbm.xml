@@ -10,7 +10,7 @@
 		</id>
 		
 		<property name="cname" column="cname"/>
-		<set name="categorySeconds" order-by="csid">
+		<set name="categorySeconds" cascade="delete" inverse="true" order-by="csid">
 			<key column="cid"/>
 			<one-to-many class="vvr.onlinestore.categorysecond.CategorySecond"/>
 		</set>
