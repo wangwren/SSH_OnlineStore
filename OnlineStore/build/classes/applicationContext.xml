@@ -105,10 +105,15 @@
 	</bean>
 	
 	<!-- =====================后台======================= -->
+	<!-- 后台用户 -->
 	<bean id="adminUserAction" class="vvr.onlinestore.admin.adminuser.AdminUserAction" scope="prototype">
 		<property name="adminUserService" ref="adminUserService"/>
 	</bean>
-	
+	<!-- 后台二级分类 -->
+	<bean id="categorySecondAction" class="vvr.onlinestore.categorysecond.CategorySecondAction" scope="prototype">
+		<property name="categorySecondService" ref="categorySecondService"/>
+		<property name="categoryService" ref="categoryService"/>
+	</bean>
 	
 	<!-- 配置service -->
 	
@@ -139,6 +144,11 @@
 		<property name="adminUserDao" ref="adminUserDao"/>
 	</bean>
 	
+	<!-- 后台二级分类 -->
+	<bean id="categorySecondService" class="vvr.onlinestore.categorysecond.CategorySecondService">
+		<property name="categorySecondDao" ref="categorySecondDao"/>
+	</bean>
+	
 	
 	<!-- 配置Dao -->
 	
@@ -166,6 +176,11 @@
 	<!-- =====================后台======================= -->
 	<!-- 后台用户 -->
 	<bean id="adminUserDao" class="vvr.onlinestore.admin.adminuser.AdminUserDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 后台二级分类 -->
+	<bean id="categorySecondDao" class="vvr.onlinestore.categorysecond.CategorySecondDao">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 </beans>

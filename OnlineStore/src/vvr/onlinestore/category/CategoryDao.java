@@ -27,6 +27,9 @@ public class CategoryDao extends HibernateDaoSupport{
 	 * @param category
 	 */
 	public void delete(Category category) {
+		
+		//必须先查询出一级分类才能完成级联操作，使集合中的数据都有才行，单靠id不能完成级联
+		category = this.getHibernateTemplate().get(Category.class, category.getCid());
 		this.getHibernateTemplate().delete(category);
 	}
 

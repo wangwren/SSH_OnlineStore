@@ -77,7 +77,7 @@
 			<!-- 登录成功 -->
 			<result name="loginSuccess" type="redirect">/admin/home.jsp</result>
 		</action>
-		
+		<!-- 后台一级分类 -->
 		<action name="category_*" class="categoryAction" method="{1}">
 			<!-- 后台查询一级分类 -->
 			<result name="adminFindAllSuccess">/admin/category/list.jsp</result>
@@ -89,6 +89,21 @@
 			<result name="adminFindByCidSuccess">/admin/category/edit.jsp</result>
 			<!-- 后台修改指定一级分类 -->
 			<result name="adminUpdateSuccess" type="redirectAction">category_adminFindAll</result>
+		</action>
+		<!-- 后台二级分类 -->
+		<action name="categorySecond_*" class="categorySecondAction" method="{1}">
+			<!-- 查询所有二级分类 -->
+			<result name="adminFindAllSuccess">/admin/categorySecond/list.jsp</result>
+			<!-- 提供二级分类添加界面 -->
+			<result name="addPageSuccess">/admin/categorySecond/add.jsp</result>
+			<!-- 后台添加二级分类 -->
+			<result name="adminSaveSuccess" type="redirectAction">categorySecond_adminFindAll?page=1</result>
+			<!-- 删除二级分类 -->
+			<result name="adminDeleteSuccess" type="redirectAction">categorySecond_adminFindAll?page=1</result>
+			<!-- 提供二级分类修改界面 -->
+			<result name="adminFindByCsidSuccess">/admin/categorySecond/edit.jsp</result>
+			<!-- 修改二级分类 -->
+			<result name="adminUpdateSuccess" type="redirectAction">categorySecond_adminFindAll?page=1</result>
 		</action>
     </package>
 

@@ -10,7 +10,7 @@
 		</id>
 		
 		<property name="csname" column="csname"/>
-		<many-to-one name="category" class="vvr.onlinestore.category.Category" column="cid" not-null="true"/>
+		<many-to-one name="category" class="vvr.onlinestore.category.Category" column="cid"/>
 		<set name="products">
 			<key column="csid"/>
 			<one-to-many class="vvr.onlinestore.product.Product"/>
