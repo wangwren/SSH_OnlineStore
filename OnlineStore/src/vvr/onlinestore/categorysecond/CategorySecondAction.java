@@ -126,9 +126,6 @@ public class CategorySecondAction extends ActionSupport implements ModelDriven<C
 	 */
 	public String adminUpdate() {
 		
-		//Category category = new Category();
-		//category.setCid(cid);
-		//categorySecond.setCategory(category);
 		categorySecondService.update(categorySecond);
 		
 		return "adminUpdateSuccess";

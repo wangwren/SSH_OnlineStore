@@ -44,6 +44,16 @@
 			<result name="findById">/WEB-INF/jsp/desc.jsp</result>
 			<!-- 二级分类下所有商品 -->
 			<result name="findByCsid">/WEB-INF/jsp/cslist.jsp</result>
+			<!-- 后台查询所有商品并分页 -->
+			<result name="adminFindAllSuccess">/admin/product/list.jsp</result>
+			<!-- 提供后台添加商品的界面 -->
+			<result name="AdminaddPageSuccess">/admin/product/add.jsp</result>
+			<!-- 后台添加产品 -->
+			<result name="amdinSaveSuccess" type="redirectAction">product_adminFindAll?page=1</result>
+			<!-- 后台删除指定产品 -->
+			<result name="adminDeleteSuccess" type="redirectAction">product_adminFindAll?page=1</result>
+			<!-- 后台提供商品修改界面 -->
+			<result name="findByPidSuccess">/admin/product/edit.jsp</result>
 		</action>
 		
 		<!-- 购物车 -->

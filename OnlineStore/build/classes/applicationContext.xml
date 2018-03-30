@@ -92,6 +92,7 @@
 	<bean id="productAction" class="vvr.onlinestore.product.ProductAction" scope="prototype">
 		<property name="productService" ref="productService"/>
 		<property name="categoryService" ref="categoryService"/>
+		<property name="categorySecondService" ref="categorySecondService"/>
 	</bean>
 	
 	<!-- 购物车 -->

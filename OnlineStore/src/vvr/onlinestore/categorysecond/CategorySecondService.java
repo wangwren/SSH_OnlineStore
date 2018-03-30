@@ -80,4 +80,13 @@ public class CategorySecondService {
 		categorySecondDao.update(categorySecond);
 	}
 
+
+	/**
+	 * 后台添加商品界面
+	 * @return
+	 */
+	public List<CategorySecond> findAll() {
+		return categorySecondDao.findAll();
+	}
+
 }

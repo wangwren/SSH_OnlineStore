@@ -103,5 +103,55 @@ public class ProductService {
 		
 		return pageBean;
 	}
+
+	/**
+	 * 后台查询所有商品并分页
+	 * @param page
+	 * @return
+	 */
+	public PageBean<Product> findByPage(Integer page) {
+		PageBean<Product> pageBean = new PageBean<Product>();
+		pageBean.setPage(page);
+		Integer limit = 10;
+		pageBean.setLimit(limit);
+		Integer total = productDao.findTotal();
+		pageBean.setTotal(total);
+		Integer totalPage = 0;
+		if(total % limit == 0) {
+			totalPage = total / limit;
+		}else {
+			totalPage = total / limit + 1;
+		}
+		pageBean.setTotalPage(totalPage);
+		Integer begin = (page - 1) * limit;
+		List<Product> list = productDao.findAllProduct(begin,limit);
+		pageBean.setList(list);
+		return pageBean;
+	}
+
+	/**
+	 * 后台添加商品
+	 * @param product
+	 */
+	public void save(Product product) {
+		productDao.save(product);
+	}
+
+	/**
+	 * 查询指定产品
+	 * @param pid
+	 * @return
+	 */
+	public Product findByPid(int pid) {
+		return productDao.findByPid(pid);
+	}
+
+	/**
+	 * 删除产品
+	 * @param pro
+	 */
+	public void delete(Product pro) {
+		productDao.delete(pro);
+	}
 	
 }

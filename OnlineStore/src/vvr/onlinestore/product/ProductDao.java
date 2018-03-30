@@ -112,4 +112,58 @@ public class ProductDao extends HibernateDaoSupport {
 		
 		return list;
 	}
+
+	/**
+	 * 后台查询所有商品记录数
+	 * @return
+	 */
+	public Integer findTotal() {
+		List<Long> list = this.getHibernateTemplate().find("select count(*) from Product");
+		if(list.size() > 0) {
+			return list.get(0).intValue();
+		}
+		return null;
+	}
+
+	/**
+	 * 查询所有商品并分页
+	 * @return
+	 */
+	public List<Product> findAllProduct(Integer begin,Integer limit) {
+		List<Product> list = this.getHibernateTemplate().executeFind(new PageHibernateCallback<Product>("from Product", null, begin, limit));
+		if(list.size() > 0) {
+			return list;
+		}
+		return null;
+	}
+
+	/**
+	 * 后台添加商品
+	 * @param product
+	 */
+	public void save(Product product) {
+		this.getHibernateTemplate().save(product);
+	}
+
+	/**
+	 * 查询指定产品
+	 * @param pid
+	 * @return
+	 */
+	public Product findByPid(int pid) {
+		//Product product = this.getHibernateTemplate().get(Product.class, pid);
+		List<Product> list = this.getHibernateTemplate().find("from Product where pid=?", pid);
+		if(list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
+
+	/**
+	 * 删除产品
+	 * @param pro
+	 */
+	public void delete(Product pro) {
+		this.getHibernateTemplate().delete(pro);
+	}
 }

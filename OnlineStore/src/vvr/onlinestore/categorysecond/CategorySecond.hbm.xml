@@ -11,7 +11,7 @@
 		
 		<property name="csname" column="csname"/>
 		<many-to-one name="category" class="vvr.onlinestore.category.Category" column="cid"/>
-		<set name="products">
+		<set name="products" cascade="delete" inverse="true">
 			<key column="csid"/>
 			<one-to-many class="vvr.onlinestore.product.Product"/>
 		</set>

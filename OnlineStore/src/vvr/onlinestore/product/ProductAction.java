@@ -1,8 +1,13 @@
 package vvr.onlinestore.product;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -10,6 +15,8 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import vvr.onlinestore.category.Category;
 import vvr.onlinestore.category.CategoryService;
+import vvr.onlinestore.categorysecond.CategorySecond;
+import vvr.onlinestore.categorysecond.CategorySecondService;
 import vvr.onlinestore.utils.PageBean;
 /**
  * 商品
@@ -19,8 +26,15 @@ import vvr.onlinestore.utils.PageBean;
 public class ProductAction extends ActionSupport implements RequestAware,ModelDriven<Product> {
 
 	private static final long serialVersionUID = -4230888613608692044L;
+	
+	//上传图片的三个参数
+	private File upload;
+	private String uploadContentType;
+	private String uploadFileName;
+	
 	private ProductService productService;
 	private CategoryService categoryService;
+	private CategorySecondService categorySecondService;
 	
 	private Integer cid;
 	private Integer csid;
@@ -56,8 +70,35 @@ public class ProductAction extends ActionSupport implements RequestAware,ModelDr
 	public Product getModel() {
 		return product;
 	}
-
 	
+	public void setCategorySecondService(CategorySecondService categorySecondService) {
+		this.categorySecondService = categorySecondService;
+	}
+	
+	public File getUpload() {
+		return upload;
+	}
+
+	public void setUpload(File upload) {
+		this.upload = upload;
+	}
+
+	public String getUploadContentType() {
+		return uploadContentType;
+	}
+
+	public void setUploadContentType(String uploadContentType) {
+		this.uploadContentType = uploadContentType;
+	}
+
+	public String getUploadFileName() {
+		return uploadFileName;
+	}
+
+	public void setUploadFileName(String uploadFileName) {
+		this.uploadFileName = uploadFileName;
+	}
+
 	/**
 	 * 查询出一级分类与对应的二级分类以及对应的所有商品
 	 * @return
@@ -110,5 +151,83 @@ public class ProductAction extends ActionSupport implements RequestAware,ModelDr
 		
 		return "findByCsid";
 	}
-
+	
+	/**
+	 * 后台查询所有商品并分页
+	 */
+	public String adminFindAll(){
+		
+		PageBean<Product> pageBean = productService.findByPage(page);
+		request.put("pageBean", pageBean);
+		return "adminFindAllSuccess";
+	}
+	
+	/**
+	 * 后台提供添加商品的界面
+	 * @return
+	 */
+	public String AdminaddPage() {
+		List<CategorySecond> cslist = categorySecondService.findAll();
+		request.put("cslist", cslist);
+		return "AdminaddPageSuccess";
+	}
+	
+	/**
+	 * 后台添加商品
+	 * @return
+	 * @throws IOException 
+	 */
+	public String amdinSave() throws IOException {
+		//获取上传的路径
+		String path = ServletActionContext.getServletContext().getRealPath("/products");
+		String realPath = path + "/" + csid + "/" + uploadFileName;
+		File destFile = new File(realPath);
+		FileUtils.copyFile(upload, destFile);
+		
+		//保存至数据库
+		CategorySecond categorySecond = new CategorySecond();
+		categorySecond.setCsid(csid);
+		product.setCategorySecond(categorySecond);
+		product.setPdate(new Date());
+		product.setImage("products/" + csid + "/" + uploadFileName);
+		productService.save(product);
+		
+		return "amdinSaveSuccess";
+	}
+	
+	/**
+	 * 删除指定产品和图片
+	 * @return
+	 */
+	public String adminDelete() {
+		
+		Product pro = productService.findByPid(product.getPid());
+		
+		String path = ServletActionContext.getServletContext().getRealPath("/products");
+		String imgPath = pro.getImage();
+		String realPath = path + imgPath.substring(imgPath.indexOf("/"));
+		
+		//删除产品
+		productService.delete(pro);
+		
+		//删除文件
+		File file = new File(realPath);
+		if(file.exists()) {
+			file.delete();
+		}
+		
+		return "adminDeleteSuccess";
+	}
+	
+	/**
+	 * 查询指定产品和所有二级分类
+	 * @return
+	 */
+	public String findByPid() {
+		Product pro = productService.findByPid(product.getPid());
+		List<CategorySecond> cslist = categorySecondService.findAll();
+		request.put("cslist", cslist);
+		request.put("product", pro);
+		return "findByPidSuccess";
+	}
 }

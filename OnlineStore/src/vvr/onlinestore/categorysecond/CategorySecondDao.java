@@ -70,4 +70,16 @@ public class CategorySecondDao extends HibernateDaoSupport{
 		this.getHibernateTemplate().update(categorySecond);
 	}
 
+	/**
+	 * 后台添加商品界面
+	 * @return
+	 */
+	public List<CategorySecond> findAll() {
+		List<CategorySecond> list = this.getHibernateTemplate().find("from CategorySecond");
+		if(list.size() > 0) {
+			return list;
+		}
+		return null;
+	}
+
 }
