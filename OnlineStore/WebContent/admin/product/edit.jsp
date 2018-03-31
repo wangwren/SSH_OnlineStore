@@ -8,9 +8,11 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/jquery/jquery.datepick.css" type="text/css">
 	</HEAD>
 	<body>
-		<form id="userAction_save_do" name="Form1" action="${pageContext.request.contextPath}/product_amdinSave.action" method="post" enctype="multipart/form-data">
+		<form id="userAction_save_do" name="Form1" action="${pageContext.request.contextPath}/product_amdinUpdate.action" method="post" enctype="multipart/form-data">
 			&nbsp;
 			<input type="hidden" name="pid" value="<s:property value="model.pid"/>"/>
+			<!-- 隐藏数据库中文件名称 -->
+			<input type="hidden" name="image" value="<s:property value="model.image"/>">
 			<table cellSpacing="1" cellPadding="5" width="100%" align="center" bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
 				<tr>
 					<td class="ta_01" align="center" bgColor="#afd1f3" colSpan="4"
@@ -61,12 +63,12 @@
 					</td>
 					<td class="ta_01" bgColor="#ffffff">
 						
-						<select name="csid" >
+						<select name="categorySecond.csid" >
 							<s:iterator var="cs" value="#request.cslist">
-								<s:if test="#cs.csid==#request.product.categorySecond.csid">
-							   		<option value="<s:property value="#cs.csid"/>"><s:property value="#cs.csname"/></option>
+								<s:if test="#cs.csid==model.categorySecond.csid">
+							   		<option value="<s:property value="#cs.csid"/>" selected="selected"><s:property value="#cs.csname"/></option>
 							   	</s:if>
-							   	<s:elseif test="#cs.csid!=#request.product.categorySecond.csid">
+							   	<s:elseif test="#cs.csid!=model.categorySecond.csid">
 							   	 	<option value="<s:property value="#cs.csid"/>"><s:property value="#cs.csname"/></option>
 							   	</s:elseif>
 						    </s:iterator>

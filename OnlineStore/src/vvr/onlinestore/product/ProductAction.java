@@ -224,10 +224,40 @@ public class ProductAction extends ActionSupport implements RequestAware,ModelDr
 	 * @return
 	 */
 	public String findByPid() {
-		Product pro = productService.findByPid(product.getPid());
+		product = productService.findByPid(product.getPid());
 		List<CategorySecond> cslist = categorySecondService.findAll();
 		request.put("cslist", cslist);
-		request.put("product", pro);
 		return "findByPidSuccess";
+	}
+	
+	/**
+	 * 修改商品
+	 * @return
+	 * @throws IOException 
+	 */
+	public String amdinUpdate() throws IOException {
+		
+		if(uploadFileName != null) {
+			//用户上传了新的图片
+			//删除旧的文件
+			String path = ServletActionContext.getServletContext().getRealPath("/products");
+			String imgPath = product.getImage();
+			String oldPath = path + imgPath.substring(imgPath.indexOf("/"));
+			if(oldPath != null && !oldPath.trim().isEmpty()) {
+				File file = new File(oldPath);
+				file.delete();
+			}
+			
+			//上传新的文件
+			String realPath = path + "/" + product.getCategorySecond().getCsid() + "/" + uploadFileName;
+			File destFile = new File(realPath);
+			FileUtils.copyFile(upload, destFile);
+			//更新数据库中的文件路径
+			product.setImage("products/" + product.getCategorySecond().getCsid() + "/" + uploadFileName);
+		}
+		
+		productService.update(product);
+		
+		return "amdinUpdateSuccess";
 	}
 }

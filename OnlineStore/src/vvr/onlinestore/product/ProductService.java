@@ -153,5 +153,13 @@ public class ProductService {
 	public void delete(Product pro) {
 		productDao.delete(pro);
 	}
+
+	/**
+	 * ÐÞ¸ÄÉÌÆ·
+	 * @param product
+	 */
+	public void update(Product product) {
+		productDao.update(product);
+	}
 	
 }

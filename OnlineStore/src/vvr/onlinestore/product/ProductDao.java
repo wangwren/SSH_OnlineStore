@@ -166,4 +166,12 @@ public class ProductDao extends HibernateDaoSupport {
 	public void delete(Product pro) {
 		this.getHibernateTemplate().delete(pro);
 	}
+
+	/**
+	 * ÐÞ¸ÄÉÌÆ·
+	 * @param product
+	 */
+	public void update(Product product) {
+		this.getHibernateTemplate().update(product);
+	}
 }

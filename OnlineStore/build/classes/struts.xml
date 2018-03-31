@@ -54,6 +54,8 @@
 			<result name="adminDeleteSuccess" type="redirectAction">product_adminFindAll?page=1</result>
 			<!-- 后台提供商品修改界面 -->
 			<result name="findByPidSuccess">/admin/product/edit.jsp</result>
+			<!-- 后台修改商品 -->
+			<result name="amdinUpdateSuccess" type="redirectAction">product_adminFindAll?page=1</result>
 		</action>
 		
 		<!-- 购物车 -->
