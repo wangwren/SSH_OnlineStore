@@ -16,6 +16,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import vvr.onlinestore.cart.Cart;
 import vvr.onlinestore.cart.CartItem;
 import vvr.onlinestore.user.User;
+import vvr.onlinestore.utils.PageBean;
 import vvr.onlinestore.utils.PaymentUtil;
 
 public class OrdersAction extends ActionSupport implements SessionAware,RequestAware{
@@ -25,6 +26,8 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 	private Map<String,Object> session;
 	private Map<String,Object> request;
 	private Orders order;
+	private Integer page;
+	private Integer state;
 	
 	//支付通道编码
 	private String pd_FrpId;
@@ -87,6 +90,22 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 
 	public void setPd_FrpId(String pd_FrpId) {
 		this.pd_FrpId = pd_FrpId;
+	}
+	
+	public Integer getPage() {
+		return page;
+	}
+
+	public void setPage(Integer page) {
+		this.page = page;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
 	}
 
 	/**
@@ -165,7 +184,8 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 		String p5_Pid = "";			//商品名称
 		String p6_Pcat = "";		//商品种类
 		String p7_Pdesc = "";		//商品描述
-		String p8_Url = "http://localhost:8080/OnlineStore/order_callBack.action";	//商户接收支付成功数据的地址
+		//此处填电脑的ip地址
+		String p8_Url = "http://192.168.43.182/OnlineStore/order_callBack.action";	//商户接收支付成功数据的地址
 		String p9_SAF = "";		//送货地址
 		String pa_MP = "";		//商户扩展信息
 		String pr_NeedResponse = "1";		//应答机制
@@ -232,5 +252,48 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 		order = ordersService.findByOid(oid);
 		request.put("order", order);
 		return "findByOidSuccess";
+	}
+	
+	/**
+	 * 后台查询所有订单
+	 * @return
+	 */
+	public String adminFindAll() {
+		PageBean<Orders> pageBean = ordersService.findAll(page);
+		request.put("pageBean", pageBean);
+		return "adminFindAllSuccess";
+	}
+	
+	/**
+	 * 后台查询指定状态的订单
+	 * @return
+	 */
+	public String adminFindByState() {
+		PageBean<Orders> pageBean = ordersService.findByState(state,page);
+		request.put("pageBean", pageBean);
+		return "adminFindByStateSuccess";
+	}
+	
+	/**
+	 * 后台商品发货
+	 * @return
+	 */
+	public String adminUpdateState() {
+		
+		order = ordersService.findByOid(oid);
+		order.setState(2);
+		ordersService.update(order);
+		return "adminUpdateStateSuccess";
+	}
+	
+	/**
+	 * 前台确认收货
+	 * @return
+	 */
+	public String updateState() {
+		order = ordersService.findByOid(oid);
+		order.setState(3);
+		ordersService.update(order);
+		return "updateStateSuccess";
 	}
 }

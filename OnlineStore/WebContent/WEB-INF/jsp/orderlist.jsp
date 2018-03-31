@@ -42,15 +42,15 @@
 								</th>
 								<th>
 									状态：<s:if test="#order.state==0">
-											<a href="${pageContext.request.contextPath }/order_findByOid?oid=${order.oid}"><font color="red">未付款</font></a>
+											<a href="${pageContext.request.contextPath }/order_findByOid.action?oid=${order.oid}"><font color="red">未付款</font></a>
 										</s:if>
 										<s:elseif test="#order.state==1">
 											已付款
 										</s:elseif>
 										<s:elseif test="#order.state==2">
-											<a href="#"><font color="red">确认收货</font></a>
+											<a href="${pageContext.request.contextPath }/order_updateState.action?oid=${order.oid}"><font color="red">确认收货</font></a>
 										</s:elseif>
-										<s:elseif test="#order.state==1">
+										<s:elseif test="#order.state==3">
 											已收货
 										</s:elseif>
 								</th>

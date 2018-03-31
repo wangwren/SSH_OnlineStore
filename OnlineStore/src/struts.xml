@@ -9,6 +9,14 @@
 
     <package name="default" namespace="/" extends="struts-default">
     
+    	<interceptors>
+    		<interceptor name="loginInterceptor" class="vvr.onlinestore.interceptor.LoginInterceptor"/>
+    	</interceptors>
+    
+    	<global-results>
+    		<result name="login" type="redirect">/admin/index.jsp</result>
+    	</global-results>
+    	
     	<!-- =================前台====================== -->
     	<!-- 首页 -->
 		<action name="index" class="indexAction">
@@ -56,6 +64,11 @@
 			<result name="findByPidSuccess">/admin/product/edit.jsp</result>
 			<!-- 后台修改商品 -->
 			<result name="amdinUpdateSuccess" type="redirectAction">product_adminFindAll?page=1</result>
+			
+			<interceptor-ref name="loginInterceptor">
+				<param name="includeMethods">adminFindAll,AdminaddPage,amdinSave,adminDelete,findByPid,amdinUpdate</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 		
 		<!-- 购物车 -->
@@ -76,8 +89,21 @@
 			<result name="callBackSuccess">/WEB-INF/jsp/msg.jsp</result>
 			<!-- 用户查询自己的订单 -->
 			<result name="findMyOrderSuccess">/WEB-INF/jsp/orderlist.jsp</result>
+			<!-- 前台确认收货 -->
+			<result name="updateStateSuccess" type="redirectAction">order_findMyOrder</result>
 			<!-- 查询未付款的订单 -->
 			<result name="findByOidSuccess">/WEB-INF/jsp/order.jsp</result>
+			<!-- 后台查询全部订单 -->
+			<result name="adminFindAllSuccess">/admin/order/list.jsp</result>
+			<!-- 后台查询指定订单状态 -->
+			<result name="adminFindByStateSuccess">/admin/order/statelist.jsp</result>
+			<!-- 后台商品发货 -->
+			<result name="adminUpdateStateSuccess" type="redirectAction">order_adminFindAll?page=1</result>
+			
+			<interceptor-ref name="loginInterceptor">
+				<param name="includeMethods">adminFindAll,adminFindByState,adminUpdateState</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 		
 		
@@ -88,6 +114,10 @@
 			<result name="input">/admin/index.jsp</result>
 			<!-- 登录成功 -->
 			<result name="loginSuccess" type="redirect">/admin/home.jsp</result>
+			<interceptor-ref name="loginInterceptor">
+				<param name="excludeMethods">login</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 		<!-- 后台一级分类 -->
 		<action name="category_*" class="categoryAction" method="{1}">
@@ -101,6 +131,9 @@
 			<result name="adminFindByCidSuccess">/admin/category/edit.jsp</result>
 			<!-- 后台修改指定一级分类 -->
 			<result name="adminUpdateSuccess" type="redirectAction">category_adminFindAll</result>
+			<interceptor-ref name="loginInterceptor">
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 		<!-- 后台二级分类 -->
 		<action name="categorySecond_*" class="categorySecondAction" method="{1}">
@@ -116,6 +149,9 @@
 			<result name="adminFindByCsidSuccess">/admin/categorySecond/edit.jsp</result>
 			<!-- 修改二级分类 -->
 			<result name="adminUpdateSuccess" type="redirectAction">categorySecond_adminFindAll?page=1</result>
+			<interceptor-ref name="loginInterceptor">
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
     </package>
 
