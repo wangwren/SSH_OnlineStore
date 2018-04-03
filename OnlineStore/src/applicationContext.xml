@@ -82,6 +82,7 @@
 	
 	<!-- 图片验证码 -->
 	<bean id="checkImg" class="vvr.onlinestore.user.CheckImgAction" scope="prototype"></bean>
+	<bean id="checkImage" class="vvr.onlinestore.user.CheckImageAction" scope="prototype"></bean>
 	
 	<!-- 一级分类 -->
 	<bean id="categoryAction" class="vvr.onlinestore.category.CategoryAction" scope="prototype">

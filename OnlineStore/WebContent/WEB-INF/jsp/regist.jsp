@@ -9,6 +9,7 @@
 <link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet" type="text/css"/>
 <link href="${pageContext.request.contextPath}/css/register.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/ajax.js"></script>
 <script type="text/javascript">
 	//前台表单验证
 	function checkForm() {
@@ -43,6 +44,7 @@
 			alert("邮箱格式不正确！！！");
 			return false;
 		}
+		
 	}
 	
 	//JQ判断数据库中是否存在该用户名
@@ -66,6 +68,37 @@
 		var img = document.getElementById("img");
 		//因为浏览器中有缓存，所以必须加上new Date().getTime()，否则不生效
 		img.src="${pageContext.request.contextPath}/checkImg.action?" + new Date().getTime();
+	}
+	
+	//异步验证验证码是否正确
+	function checkImage() {
+		var checkCode = document.getElementById("checkCode").value;
+		if(checkCode.length == 4){
+			//alert(checkCode);
+			var ajax = createAJAX();
+			ajax.open("POST","${pageContext.request.contextPath}/checkImage.action?time=" + new Date().getTime());
+			ajax.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+			ajax.send("checkCode=" + checkCode);
+			
+			//-----------------等
+			ajax.onreadystatechange = function(){
+				if(ajax.readyState == 4){
+					if(ajax.status == 200){
+						var msg = ajax.responseText;
+						if(msg == "yes"){
+							var judgment = document.getElementById("judgment");
+							judgment.innerHTML = "<img src='${pageContext.request.contextPath}/images/MsgSent.gif' width='24px' height='12px' />";
+						}else{
+							var judgment = document.getElementById("judgment");
+							judgment.innerHTML = "<img src='${pageContext.request.contextPath}/images/MsgError.gif' width='24px' height='12px' />";
+						}
+					}
+				}
+			}
+		}else{
+			var judgment = document.getElementById("judgment");
+			judgment.innerHTML = "";
+		}
 	}
 </script>
 </head>
@@ -164,7 +197,8 @@
 									</th>
 									<td>
 										<span class="fieldSet">
-											<input type="text" id="checkCode" name="checkCode" class="text captcha" maxlength="4" autocomplete="off"><img id="img" class="captchaImage" src="${pageContext.request.contextPath}/checkImg.action" onclick="checkImg()" title="点击更换验证码">
+											<input type="text" id="checkCode" name="checkCode" onkeyup="checkImage()" class="text captcha" maxlength="4" autocomplete="off"><img id="img" class="captchaImage" src="${pageContext.request.contextPath}/checkImg.action" onclick="checkImg()" title="点击更换验证码">
+											<span id="judgment"></span>
 										</span>
 									</td>
 								</tr>
