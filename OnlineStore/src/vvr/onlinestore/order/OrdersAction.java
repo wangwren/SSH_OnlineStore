@@ -184,14 +184,15 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 		String p5_Pid = "";			//商品名称
 		String p6_Pcat = "";		//商品种类
 		String p7_Pdesc = "";		//商品描述
-		//此处填电脑的ip地址
-		String p8_Url = "http://192.168.43.182/OnlineStore/order_callBack.action";	//商户接收支付成功数据的地址
+		//此处填电脑的ip地址192.168.43.182
+		
+		String p8_Url = "http://localhost:8080/OnlineStore/order_callBack.action";	//商户接收支付成功数据的地址
 		String p9_SAF = "";		//送货地址
 		String pa_MP = "";		//商户扩展信息
 		String pr_NeedResponse = "1";		//应答机制
 		String keyValue = "69cl522AV6q613Ii4W6u8K6XuW8vM1N6bFgyv769220IuYe9u37N4y7rI4Pl";
 		//签名数据
-		String hmac = PaymentUtil.buildHmac(p0_Cmd, p1_MerId, p2_Order, p3_Amt, p4_Cur, p5_Pid, p6_Pcat, p7_Pdesc, p8_Url, p9_SAF, pa_MP,pd_FrpId , pr_NeedResponse, keyValue);
+		String hmac = PaymentUtil.buildHmac(p0_Cmd, p1_MerId, p2_Order, p3_Amt, p4_Cur, p5_Pid, p6_Pcat, p7_Pdesc, p8_Url, p9_SAF, pa_MP,pd_FrpId, pr_NeedResponse, keyValue);
 		
 		StringBuffer sb = new StringBuffer("https://www.yeepay.com/app-merchant-proxy/node?");
 		sb.append("p0_Cmd=").append(p0_Cmd).append("&");
@@ -208,7 +209,9 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 		sb.append("pd_FrpId=").append(pd_FrpId).append("&");
 		sb.append("pr_NeedResponse=").append(pr_NeedResponse).append("&");
 		sb.append("hmac=").append(hmac);
+		
 		System.out.println(sb.toString());
+		
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.sendRedirect(sb.toString());
 		

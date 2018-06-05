@@ -131,6 +131,7 @@ public class ProductDao extends HibernateDaoSupport {
 	 */
 	public List<Product> findAllProduct(Integer begin,Integer limit) {
 		List<Product> list = this.getHibernateTemplate().executeFind(new PageHibernateCallback<Product>("from Product", null, begin, limit));
+		
 		if(list.size() > 0) {
 			return list;
 		}
