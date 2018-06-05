@@ -79,4 +79,5 @@
 ### 效果
 
 ![](./_image/2018-06-05-13-47-17.jpg)
-- 还有各种样式可以自己定义，具体可以查看网站https://www.revolvermaps.com，完全免费、开源。
+- 还有各种样式可以自己定义，具体可以查看网站https://www.revolvermaps.com
+- 完全免费、开源
