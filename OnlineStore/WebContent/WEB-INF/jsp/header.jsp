@@ -3,7 +3,7 @@
 <div class="span5">
 		<div class="logo">
 			<a href="./京华亿家/index.htm">
-				<img src="${pageContext.request.contextPath}/image/r___________renleipic_01/benzhang.png" alt="笨张张"/>
+				<img src="${pageContext.request.contextPath}/image/r___________renleipic_01/bzz.png" alt="笨张张"/>
 			</a>
 		</div>
 	</div>

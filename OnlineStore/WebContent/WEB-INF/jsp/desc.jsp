@@ -12,6 +12,11 @@
 <link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/css/product.css" rel="stylesheet" type="text/css">
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/zzsc.css">
+
+<script type="text/javascript" class="library" src="${pageContext.request.contextPath}/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" class="library" src="${pageContext.request.contextPath}/js/jquery.colorbox-min.js"></script>
+<script type="text/javascript" class="library" src="${pageContext.request.contextPath}/js/zzsc.js"></script>
 </head>
 <body>
 <form action="${pageContext.request.contextPath }/cart_addCart.action" method="post">
@@ -62,13 +67,26 @@
 			
 			<div class="productImage">
 					<a title="" style="outline-style: none; text-decoration: none;" id="zoom" href="http://image/r___________renleipic_01/bigPic1ea8f1c9-8b8e-4262-8ca9-690912434692.jpg" rel="gallery">
-						<div class="zoomPad"><img style="opacity: 1;" title="" class="medium" src="${pageContext.request.contextPath }/${model.image}">
-						<div style="display: block; top: 0px; left: 162px; width: 0px; height: 0px; position: absolute; border-width: 1px;" class="zoomPup"></div>
-						<div style="position: absolute; z-index: 5001; left: 312px; top: 0px; display: block;" class="zoomWindow">
-							<div style="width: 368px;" class="zoomWrapper"><div style="width: 100%; position: absolute; display: none;" class="zoomWrapperTitle"></div>
-								<div style="width: 0%; height: 0px;" class="zoomWrapperImage"><img src="%E5%B0%9A%E9%83%BD%E6%AF%94%E6%8B%89%E5%A5%B3%E8%A3%852013%E5%A4%8F%E8%A3%85%E6%96%B0%E6%AC%BE%E8%95%BE%E4%B8%9D%E8%BF%9E%E8%A1%A3%E8%A3%99%20%E9%9F%A9%E7%89%88%E4%BF%AE%E8%BA%AB%E9%9B%AA%E7%BA%BA%E6%89%93%E5%BA%95%E8%A3%99%E5%AD%90%20%E6%98%A5%E6%AC%BE%20-%20Powered%20By%20Mango%20Team_files/6d53c211-2325-41ed-8696-d8fbceb1c199-large.jpg" style="position: absolute; border: 0px none; display: block; left: -432px; top: 0px;"></div>
+						<div class="zoomPad">
+						
+							<div class="con-FangDa" id="fangdajing">
+							  <div class="con-fangDaIMg">
+							  	<!-- 正常显示的图片-->
+							  	<img src="${pageContext.request.contextPath }/${model.image}">
+							    <!-- 滑块-->  
+							    <div class="magnifyingBegin"></div>
+							    <!-- 放大镜显示的图片 -->
+							    <div class="magnifyingShow"><img src="${pageContext.request.contextPath }/${model.image}"></div>
+							  </div>
 							</div>
-						</div>
+						
+							<%-- <img style="opacity: 1;" title="" class="medium" src="${pageContext.request.contextPath }/${model.image}"> --%>
+							<div style="display: block; top: 0px; left: 162px; width: 0px; height: 0px; position: absolute; border-width: 1px;" class="zoomPup"></div>
+							<div style="position: absolute; z-index: 5001; left: 312px; top: 0px; display: block;" class="zoomWindow">
+								<div style="width: 368px;" class="zoomWrapper"><div style="width: 100%; position: absolute; display: none;" class="zoomWrapperTitle"></div>
+									<div style="width: 0%; height: 0px;" class="zoomWrapperImage"><img src="%E5%B0%9A%E9%83%BD%E6%AF%94%E6%8B%89%E5%A5%B3%E8%A3%852013%E5%A4%8F%E8%A3%85%E6%96%B0%E6%AC%BE%E8%95%BE%E4%B8%9D%E8%BF%9E%E8%A1%A3%E8%A3%99%20%E9%9F%A9%E7%89%88%E4%BF%AE%E8%BA%AB%E9%9B%AA%E7%BA%BA%E6%89%93%E5%BA%95%E8%A3%99%E5%AD%90%20%E6%98%A5%E6%AC%BE%20-%20Powered%20By%20Mango%20Team_files/6d53c211-2325-41ed-8696-d8fbceb1c199-large.jpg" style="position: absolute; border: 0px none; display: block; left: -432px; top: 0px;"></div>
+								</div>
+							</div>
 						<div style="visibility: hidden; top: 129.5px; left: 106px; position: absolute;" class="zoomPreload">Loading zoom</div>
 						</div>
 					</a>
@@ -80,7 +98,7 @@
 			</div>
 			<div class="info">
 				<dl>
-					<dt>笨张价:</dt>
+					<dt>BZ价:</dt>
 					<dd>
 						<strong>￥：${model.shop_price }元</strong>
 							参 考 价：

@@ -186,7 +186,7 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 		String p7_Pdesc = "";		//商品描述
 		//此处填电脑的ip地址192.168.43.182
 		
-		String p8_Url = "http://localhost:8080/OnlineStore/order_callBack.action";	//商户接收支付成功数据的地址
+		String p8_Url = "http://192.168.1.4/OnlineStore/order_callBack.action";	//商户接收支付成功数据的地址
 		String p9_SAF = "";		//送货地址
 		String pa_MP = "";		//商户扩展信息
 		String pr_NeedResponse = "1";		//应答机制
