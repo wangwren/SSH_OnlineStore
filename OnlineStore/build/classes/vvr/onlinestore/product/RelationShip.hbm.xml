@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="vvr.onlinestore.product.RelationShip" table="relationship">
+		<id name="id" column="id">
+			<generator class="native"/>
+		</id>
+		
+		<one-to-one name="size" class="vvr.onlinestore.product.Size"></one-to-one>
+		<one-to-one name="product" class="vvr.onlinestore.product.Product"></one-to-one>
+	</class>
+
+</hibernate-mapping>

@@ -19,6 +19,40 @@
 <script type="text/javascript" class="library" src="${pageContext.request.contextPath}/js/zzsc.js"></script>
 </head>
 <body>
+<script type="text/javascript">
+	function getSize(){
+		
+		//alert("aaaaa");
+		var sizeValue = null;
+		var size = document.getElementsByName("size");
+		for(var i = 0;i < size.length;i++){
+			if(size[i].checked == true){
+				sizeValue = size[i].value;
+				break;
+			}
+		}
+		//alert(sizeValue);
+		
+		var url = "${pageContext.request.contextPath }/product_findSize.action?pid=${model.pid}";
+		var param = {"sizeValue" : sizeValue};
+		$.post(url,param,function(data){
+			if(data == "null" || data == 0){
+				
+				$("#spanID").html("<font color='red'>(库存不足！)</font>");
+				
+			}else if(data > 0 || data!= "null"){
+				
+				$("#spanID").html("<font>(库存数量"+data+")</font>");
+				document.getElementById("addCart").disabled = false;
+			}
+				
+		});
+		
+		
+		//选中尺寸后，提交按钮才可以点击
+		//document.getElementById("addCart").disabled = false;
+	}
+</script>
 <form action="${pageContext.request.contextPath }/cart_addCart.action" method="post">
 <!-- 隐藏字段，保存商品的id -->
 <input type="hidden" name="pid" value="${model.pid }"/>
@@ -119,8 +153,16 @@
 					</dl>
 			</div>
 				<div class="action">
-					
+						
+						<dt>尺寸:</dt>
+						<dd>
+							<input type="radio" name="size" value="xl" onclick="getSize()" />XL&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="radio" name="size" value="xxl" onclick="getSize()" />XXL&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="radio" name="size" value="s" onclick="getSize()" />S&nbsp;&nbsp;&nbsp;&nbsp;
+						</dd>
+						
 						<dl class="quantity">
+							
 							<dt>购买数量:</dt>
 							<dd>
 								<input id="quantity" name="count" value="1" maxlength="4" onpaste="return false;" type="text">
@@ -134,8 +176,8 @@
 							</dd>
 						</dl>
 					<div class="buy">
-							<input id="addCart" class="addCart" value="加入购物车" type="submit">
-				
+							<input id="addCart" class="addCart" value="加入购物车" type="submit" disabled="disabled">
+							<span id="spanID"></span>
 					</div>
 				</div>
 			<div id="bar" class="bar">

@@ -35,6 +35,7 @@
 						<th>商品</th>
 						<th>价格</th>
 						<th>数量</th>
+						<th>尺寸</th>
 						<th>小计</th>
 						<th>操作</th>
 					</tr>
@@ -52,6 +53,11 @@
 							<td class="quantity" width="60">
 								${item.count}
 							</td>
+							
+							<td class="quantity" width="60">
+									${item.size}码
+							</td>
+							
 							<td width="140">
 								<span class="subtotal">￥${item.subtotal}</span>
 							</td>

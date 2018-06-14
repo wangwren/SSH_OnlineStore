@@ -2,9 +2,12 @@ package vvr.onlinestore.product;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
@@ -43,6 +46,15 @@ public class ProductAction extends ActionSupport implements RequestAware,ModelDr
 	
 	private Map<String,Object> request;
 	
+	//客户选中的衣服尺码
+	private String sizeValue;
+	
+	
+	
+	public void setSizeValue(String sizeValue) {
+		this.sizeValue = sizeValue;
+	}
+
 	public void setPage(Integer page) {
 		this.page = page;
 	}
@@ -130,6 +142,11 @@ public class ProductAction extends ActionSupport implements RequestAware,ModelDr
 		
 		product = productService.findById(product.getPid());
 		//可以不必存至request域中，有模型驱动，前台可以使用 model.属性名 来取值
+		
+		
+		//查询指定商品型号库存
+		/*Integer num = productService.findSize(2, "xl");
+		System.out.println("-----------------" + num);*/
 		
 		return "findById";
 	}
@@ -259,5 +276,26 @@ public class ProductAction extends ActionSupport implements RequestAware,ModelDr
 		productService.update(product);
 		
 		return "amdinUpdateSuccess";
+	}
+	
+	/**
+	 * 查询客户选中衣服尺码的库存数量
+	 * @return
+	 * @throws Exception
+	 */
+	public String findSize() throws Exception{
+		
+		/*System.out.println(product.getPid());
+		System.out.println(sizeValue);*/
+		
+		Integer num = productService.findSize(product.getPid(), sizeValue);
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter writer = response.getWriter();
+		
+		writer.print(num);
+		
+		return NONE;
 	}
 }

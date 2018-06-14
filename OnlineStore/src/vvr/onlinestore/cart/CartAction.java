@@ -20,9 +20,17 @@ public class CartAction extends ActionSupport implements SessionAware{
 	private Integer pid;
 	private Integer count;
 	
+	//³ßÂë
+	private String size = null;
+	
 	private ProductService productService;
 	private Map<String,Object> session;
 	
+	
+	public void setSize(String size) {
+		this.size = size;
+	}
+
 	public void setPid(Integer pid) {
 		this.pid = pid;
 	}
@@ -61,6 +69,10 @@ public class CartAction extends ActionSupport implements SessionAware{
 		
 		//¹ºÎïÏî
 		CartItem cartItem = new CartItem();
+		if(size != null) {
+			size = size.toUpperCase();
+			cartItem.setSize(size);
+		}
 		cartItem.setCount(count);
 		
 		Product product = productService.findById(pid);

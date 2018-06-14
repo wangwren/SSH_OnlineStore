@@ -162,4 +162,26 @@ public class ProductService {
 		productDao.update(product);
 	}
 	
+	
+	public Integer findSize(Integer id,String size) {
+		return productDao.findSize(id, size);
+	}
+	
+	
+	public void updateSize(String sizeColumn,Size size) {
+		
+		productDao.updateSize(sizeColumn, size);
+	}
+	
+	public Integer findSizeId(Integer id) {
+		return productDao.findSizeId(id);
+	}
+	
+	public Size findSizeByPid(Integer pid) {
+		return productDao.findSizeByPid(pid);
+	}
+	
+	public void updateSize(Size size) {
+		productDao.updateSize(size);
+	}
 }

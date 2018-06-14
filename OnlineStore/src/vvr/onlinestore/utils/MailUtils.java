@@ -19,7 +19,6 @@ import javax.mail.internet.MimeMessage.RecipientType;
  *
  */
 public class MailUtils {
-
 	/**
 	 * 
 	 * @param to   ÊÕ¼şÈË

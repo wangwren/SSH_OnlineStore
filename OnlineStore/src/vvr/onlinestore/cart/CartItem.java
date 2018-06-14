@@ -17,6 +17,18 @@ public class CartItem {
 	
 	//Ð¡¼Æ
 	private Double subtotal = 0d;
+	
+	//³ßÂë
+	private String size = null;
+	
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
 
 	public Product getProduct() {
 		return product;

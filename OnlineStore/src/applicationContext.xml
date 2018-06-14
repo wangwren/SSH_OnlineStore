@@ -51,6 +51,8 @@
 				<value>vvr/onlinestore/order/Orders.hbm.xml</value>
 				<value>vvr/onlinestore/order/OrderItem.hbm.xml</value>
 				<value>vvr/onlinestore/admin/adminuser/AdminUser.hbm.xml</value>
+				<value>vvr/onlinestore/product/Size.hbm.xml</value>
+				<value>vvr/onlinestore/product/RelationShip.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -104,6 +106,7 @@
 	<!-- 订单 -->
 	<bean id="orderAction" class="vvr.onlinestore.order.OrdersAction" scope="prototype">
 		<property name="ordersService" ref="orderService"/>
+		<property name="productService" ref="productService"/>
 	</bean>
 	
 	<!-- =====================后台======================= -->

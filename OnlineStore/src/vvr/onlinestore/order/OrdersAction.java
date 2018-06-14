@@ -15,6 +15,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import vvr.onlinestore.cart.Cart;
 import vvr.onlinestore.cart.CartItem;
+import vvr.onlinestore.product.ProductService;
+import vvr.onlinestore.product.Size;
 import vvr.onlinestore.user.User;
 import vvr.onlinestore.utils.PageBean;
 import vvr.onlinestore.utils.PaymentUtil;
@@ -39,7 +41,14 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 	private Integer oid;
 	
 	private OrdersService ordersService;
+	private ProductService productService;
 	
+	
+	
+	public void setProductService(ProductService productService) {
+		this.productService = productService;
+	}
+
 	public Orders getOrder() {
 		return order;
 	}
@@ -138,13 +147,39 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 		//封装订单项,在映射配置文件中设置级联操作
 		for(CartItem item:cart.getCartItems()) {
 			OrderItem oitem = new OrderItem();
+			oitem.setSize(item.getSize());
 			oitem.setCount(item.getCount());
 			oitem.setSubtotal(item.getSubtotal());
 			oitem.setProduct(item.getProduct());
+			
+			//更改指定商品的指定尺寸的库存
+			Integer count = productService.findSize(item.getProduct().getPid(), item.getSize().toLowerCase());
+			Size size = productService.findSizeByPid(item.getProduct().getPid());
+			//Size size = new Size();
+			//size.setId(sid);
+			if(item.getSize().equalsIgnoreCase("XL")) {
+				count = count - item.getCount();
+				size.setXlSize(count);
+			}else if(item.getSize().equalsIgnoreCase("XXL")) {
+				count = count - item.getCount();
+				size.setXxlSize(count);;
+			}else if(item.getSize().equalsIgnoreCase("S")) {
+				count = count - item.getCount();
+				size.setsSize(count);;
+			}else if(item.getSize().equalsIgnoreCase("M")) {
+				count = count - item.getCount();
+				size.setmSize(count);;
+			}
+			
+			//productService.updateSize(item.getSize().toLowerCase() + "Size", size);
+			productService.updateSize(size);
+			
 			oitem.setOrders(order);
 			
 			//将订单项设置到订单中
 			order.getOrderItems().add(oitem);
+			
+			
 		}
 		
 		//保存订单；

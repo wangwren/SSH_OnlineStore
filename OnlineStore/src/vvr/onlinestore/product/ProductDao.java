@@ -6,6 +6,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.junit.Test;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import vvr.onlinestore.utils.PageHibernateCallback;
@@ -174,5 +175,50 @@ public class ProductDao extends HibernateDaoSupport {
 	 */
 	public void update(Product product) {
 		this.getHibernateTemplate().update(product);
+	}
+	
+	
+	/**
+	 * 查询指定商品库存
+	 */
+	public Integer findSize(Integer id,String size) {
+		
+		//String hql = "select s." + size + "Size from RelationShip as rs,Size as s WHERE rs.id=s.id AND rs.product.pid=?";
+		String hql = "select " + size + "Size from Size where product.pid = ?";
+		List<Integer> num = this.getHibernateTemplate().find(hql, id);
+		if(num.size() > 0) {
+			//System.out.println(num.get(0));
+			return num.get(0);
+		}
+		return null;
+	}
+	
+	
+	public void updateSize(String sizeColumn,Size size) {
+		
+		this.getHibernateTemplate().update(sizeColumn, size);
+	}
+	
+	public Integer findSizeId(Integer id) {
+		
+		String hql = "select id from Size where product.pid = ?";
+		List<Integer> sid = this.getHibernateTemplate().find(hql, id);
+		if(sid.size() > 0) {
+			return sid.get(0);
+		}
+		
+		return null;
+	}
+	
+	
+	public Size findSizeByPid(Integer id) {
+		
+		String hql = "from Size where product.pid = ?";
+		List<Size> size = this.getHibernateTemplate().find(hql, id);
+		return size.get(0);
+	}
+	
+	public void updateSize(Size size) {
+		this.getHibernateTemplate().update(size);
 	}
 }

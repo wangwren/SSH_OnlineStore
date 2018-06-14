@@ -24,8 +24,19 @@ public class OrderItem {
 	private Integer count;
 	private Double subtotal;
 	
+	private String size = null;
+	
 	private Product product;
 	private Orders orders;
+	
+	
+	
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
 	public Integer getItemid() {
 		return itemid;
 	}

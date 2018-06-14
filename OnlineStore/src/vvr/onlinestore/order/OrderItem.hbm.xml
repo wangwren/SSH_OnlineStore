@@ -11,6 +11,7 @@
 		
 		<property name="count" column="count"/>
 		<property name="subtotal" column="subtotal"/>
+		<property name="size" column="size"/>
 		
 		<many-to-one name="product" class="vvr.onlinestore.product.Product" column="pid" lazy="false"/>
 		
