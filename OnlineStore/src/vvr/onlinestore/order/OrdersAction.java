@@ -172,6 +172,7 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 			}
 			
 			//productService.updateSize(item.getSize().toLowerCase() + "Size", size);
+			//¸üÐÂ
 			productService.updateSize(size);
 			
 			oitem.setOrders(order);

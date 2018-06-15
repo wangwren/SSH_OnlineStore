@@ -78,7 +78,7 @@
 									</span>
 									 
 									<span class="price">
-										笨张价： ￥${p.shop_price}
+										BZ价： ￥${p.shop_price}
 									</span>
 								</a>
 							</li>

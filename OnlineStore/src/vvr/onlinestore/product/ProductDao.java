@@ -193,12 +193,21 @@ public class ProductDao extends HibernateDaoSupport {
 		return null;
 	}
 	
-	
+	/**
+	 * 更新尺寸表的指定列
+	 * @param sizeColumn
+	 * @param size
+	 */
 	public void updateSize(String sizeColumn,Size size) {
 		
 		this.getHibernateTemplate().update(sizeColumn, size);
 	}
 	
+	/**
+	 * 查询指定商品编号对应尺码表的id
+	 * @param id
+	 * @return
+	 */
 	public Integer findSizeId(Integer id) {
 		
 		String hql = "select id from Size where product.pid = ?";
@@ -210,7 +219,11 @@ public class ProductDao extends HibernateDaoSupport {
 		return null;
 	}
 	
-	
+	/**
+	 * 通过id查询指定商品的尺寸库存
+	 * @param id
+	 * @return
+	 */
 	public Size findSizeByPid(Integer id) {
 		
 		String hql = "from Size where product.pid = ?";
@@ -218,6 +231,10 @@ public class ProductDao extends HibernateDaoSupport {
 		return size.get(0);
 	}
 	
+	/**
+	 * 库存跟新
+	 * @param size
+	 */
 	public void updateSize(Size size) {
 		this.getHibernateTemplate().update(size);
 	}
