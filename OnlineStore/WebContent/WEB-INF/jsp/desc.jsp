@@ -158,7 +158,7 @@
 							<dd>
 								<input type="radio" name="size" value="xl" onclick="getSize()" />XL&nbsp;&nbsp;&nbsp;&nbsp;
 								<input type="radio" name="size" value="xxl" onclick="getSize()" />XXL&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="radio" name="size" value="s" onclick="getSize()" />S&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="size" value="ss" onclick="getSize()" />S&nbsp;&nbsp;&nbsp;&nbsp;
 							</dd>
 						</s:if>
 						

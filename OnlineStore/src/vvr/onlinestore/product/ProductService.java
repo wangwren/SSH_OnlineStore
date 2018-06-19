@@ -189,4 +189,8 @@ public class ProductService {
 		
 		return productDao.findCidByPid(pid);
 	}
+	
+	public void updateOrSaveSize(Size size) {
+		productDao.updateOrSaveSize(size);
+	}
 }

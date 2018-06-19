@@ -166,10 +166,10 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 					size.setXxlSize(count);;
 				}else if(item.getSize().equalsIgnoreCase("S")) {
 					count = count - item.getCount();
-					size.setsSize(count);;
+					size.setSsSize(count);
 				}else if(item.getSize().equalsIgnoreCase("M")) {
 					count = count - item.getCount();
-					size.setmSize(count);;
+					size.setMmSize(count);
 				}
 				
 				//productService.updateSize(item.getSize().toLowerCase() + "Size", size);

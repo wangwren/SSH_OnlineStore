@@ -228,7 +228,11 @@ public class ProductDao extends HibernateDaoSupport {
 		
 		String hql = "from Size where product.pid = ?";
 		List<Size> size = this.getHibernateTemplate().find(hql, id);
-		return size.get(0);
+		if(size.size() > 0) {
+			
+			return size.get(0);
+		}
+		return null;
 	}
 	
 	/**
@@ -257,5 +261,10 @@ public class ProductDao extends HibernateDaoSupport {
 		}
 		
 		return null;
+	}
+	
+	public void updateOrSaveSize(Size size) {
+		
+		this.getHibernateTemplate().saveOrUpdate(size);
 	}
 }

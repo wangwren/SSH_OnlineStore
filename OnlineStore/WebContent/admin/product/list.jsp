@@ -50,7 +50,7 @@
 									<td align="center" width="8%">
 										商城价格
 									</td>
-									<td align="center" width="23%">
+									<td align="center" width="12%">
 										市场价格
 									</td>
 									<td width="11%" align="center">
@@ -58,6 +58,9 @@
 									</td>
 									<td width="7%" align="center">
 										编辑
+									</td>
+									<td width="7%" align="center">
+										库存管理
 									</td>
 									<td width="7%" align="center">
 										删除
@@ -83,7 +86,7 @@
 												<s:property value="#p.shop_price"/>
 											</td>
 											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-												width="23%">
+												width="12%">
 												<s:property value="#p.market_price"/>
 											</td>
 											<td style="CURSOR: hand; HEIGHT: 22px" align="center">
@@ -99,7 +102,11 @@
 													<img src="${pageContext.request.contextPath}/images/i_edit.gif" border="0" style="CURSOR: hand">
 												</a>
 											</td>
-											
+											<td align="center" style="HEIGHT: 22px">
+												<a href="${pageContext.request.contextPath}/product_findSizeByPid.action?pid=${p.pid}">
+													<img src="${pageContext.request.contextPath}/images/i_edit.gif" border="0" style="CURSOR: hand">
+												</a>
+											</td>
 											<td align="center" style="HEIGHT: 22px">
 												<a href="${pageContext.request.contextPath}/product_adminDelete.action?pid=${p.pid}">
 													<img src="${pageContext.request.contextPath}/images/i_del.gif" width="16" height="16" border="0" style="CURSOR: hand">

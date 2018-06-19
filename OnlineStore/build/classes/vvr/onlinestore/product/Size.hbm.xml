@@ -11,8 +11,8 @@
 		
 		<property name="xlSize" column="XL"/>
 		<property name="xxlSize" column="XXL"/>
-		<property name="sSize" column="S"/>
-		<property name="mSize" column="M"/>
+		<property name="ssSize" column="S"/>
+		<property name="mmSize" column="M"/>
 		
 		<one-to-one name="product" class="vvr.onlinestore.product.Product"></one-to-one>
 	</class>

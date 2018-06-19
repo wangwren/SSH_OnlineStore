@@ -27,7 +27,7 @@
 								<tr
 									style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
 
-									<td align="left" width="10%" colspan="5">
+									<td align="left" width="10%" colspan="6">
 										订单号:<s:property value="#order.oid"/> &nbsp;&nbsp;&nbsp;&nbsp;
 										订单金额:<s:property value="#order.total"/> &nbsp;&nbsp;&nbsp;&nbsp;
 										订单状态:
@@ -61,6 +61,10 @@
 												名称
 											</td>
 											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+												width="17%">
+												尺寸
+											</td>
+											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
 												width="8%">
 												数量
 											</td>
@@ -84,6 +88,10 @@
 											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
 												width="17%">
 												<s:property value="#orderItem.product.pname"/>
+											</td>
+											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+												width="17%">
+												<s:property value="#orderItem.size"/>
 											</td>
 											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
 												width="8%">

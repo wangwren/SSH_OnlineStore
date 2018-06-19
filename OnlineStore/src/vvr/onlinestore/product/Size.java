@@ -11,8 +11,8 @@ public class Size {
 	//以下为对应的尺码，存的是数量
 	private Integer xlSize;
 	private Integer xxlSize;
-	private Integer sSize;
-	private Integer mSize;
+	private Integer ssSize;
+	private Integer mmSize;
 	
 	//商品
 	private Product product;
@@ -43,17 +43,17 @@ public class Size {
 	public void setXxlSize(Integer xxlSize) {
 		this.xxlSize = xxlSize;
 	}
-	public Integer getsSize() {
-		return sSize;
+	public Integer getSsSize() {
+		return ssSize;
 	}
-	public void setsSize(Integer sSize) {
-		this.sSize = sSize;
+	public void setSsSize(Integer ssSize) {
+		this.ssSize = ssSize;
 	}
-	public Integer getmSize() {
-		return mSize;
+	public Integer getMmSize() {
+		return mmSize;
 	}
-	public void setmSize(Integer mSize) {
-		this.mSize = mSize;
+	public void setMmSize(Integer mmSize) {
+		this.mmSize = mmSize;
 	}
 	
 	

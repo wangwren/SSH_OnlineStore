@@ -66,9 +66,13 @@
 			<result name="findByPidSuccess">/admin/product/edit.jsp</result>
 			<!-- 后台修改商品 -->
 			<result name="amdinUpdateSuccess" type="redirectAction">product_adminFindAll?page=1</result>
+			<!-- 后台管理库存 -->
+			<result name="findSizeByPidSuccess">/admin/product/editsize.jsp</result>
+			
+			<result name="updateOrSaveSize" type="redirectAction">product_adminFindAll?page=1</result>
 			
 			<interceptor-ref name="loginInterceptor">
-				<param name="includeMethods">adminFindAll,AdminaddPage,amdinSave,adminDelete,findByPid,amdinUpdate</param>
+				<param name="includeMethods">adminFindAll,AdminaddPage,amdinSave,adminDelete,findByPid,amdinUpdate,findSizeByPid</param>
 			</interceptor-ref>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>

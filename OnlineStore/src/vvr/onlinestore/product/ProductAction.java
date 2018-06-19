@@ -49,8 +49,19 @@ public class ProductAction extends ActionSupport implements RequestAware,ModelDr
 	//客户选中的衣服尺码
 	private String sizeValue;
 	
+	private Size size;
 	
 	
+	
+	
+	public Size getSize() {
+		return size;
+	}
+
+	public void setSize(Size size) {
+		this.size = size;
+	}
+
 	public void setSizeValue(String sizeValue) {
 		this.sizeValue = sizeValue;
 	}
@@ -299,5 +310,30 @@ public class ProductAction extends ActionSupport implements RequestAware,ModelDr
 		writer.print(num);
 		
 		return NONE;
+	}
+	
+	/**
+	 * 后台查询指定商品的库存
+	 * @return
+	 * @throws Exception
+	 */
+	public String findSizeByPid() throws Exception{
+		
+		Size size = productService.findSizeByPid(product.getPid());
+		request.put("size", size);
+		
+		return "findSizeByPidSuccess";
+	}
+	
+	/**
+	 * 保存或修改尺寸库存
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateOrSaveSize() throws Exception{
+		
+		productService.updateOrSaveSize(size);
+		
+		return "updateOrSaveSize";
 	}
 }
