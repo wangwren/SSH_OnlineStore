@@ -238,4 +238,24 @@ public class ProductDao extends HibernateDaoSupport {
 	public void updateSize(Size size) {
 		this.getHibernateTemplate().update(size);
 	}
+	
+	
+	/**
+	 * 通过商品id查询所属的一级分类
+	 * @param pid
+	 * @return
+	 */
+	public Integer findCidByPid(Integer pid) {
+		
+		String hql = "SELECT cs.category.cid FROM Product p,CategorySecond cs WHERE p.categorySecond.csid = cs.csid AND p.pid = ?";
+		
+		//多表查询
+		List<Integer> cid = this.getHibernateTemplate().find(hql,pid);
+
+		if(cid.size() > 0) {
+			return cid.get(0);
+		}
+		
+		return null;
+	}
 }

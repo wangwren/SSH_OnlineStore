@@ -153,27 +153,29 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 			oitem.setProduct(item.getProduct());
 			
 			//更改指定商品的指定尺寸的库存
-			Integer count = productService.findSize(item.getProduct().getPid(), item.getSize().toLowerCase());
-			Size size = productService.findSizeByPid(item.getProduct().getPid());
-			//Size size = new Size();
-			//size.setId(sid);
-			if(item.getSize().equalsIgnoreCase("XL")) {
-				count = count - item.getCount();
-				size.setXlSize(count);
-			}else if(item.getSize().equalsIgnoreCase("XXL")) {
-				count = count - item.getCount();
-				size.setXxlSize(count);;
-			}else if(item.getSize().equalsIgnoreCase("S")) {
-				count = count - item.getCount();
-				size.setsSize(count);;
-			}else if(item.getSize().equalsIgnoreCase("M")) {
-				count = count - item.getCount();
-				size.setmSize(count);;
+			if(item.getSize() != null) {
+				Integer count = productService.findSize(item.getProduct().getPid(), item.getSize().toLowerCase());
+				Size size = productService.findSizeByPid(item.getProduct().getPid());
+				//Size size = new Size();
+				//size.setId(sid);
+				if(item.getSize().equalsIgnoreCase("XL")) {
+					count = count - item.getCount();
+					size.setXlSize(count);
+				}else if(item.getSize().equalsIgnoreCase("XXL")) {
+					count = count - item.getCount();
+					size.setXxlSize(count);;
+				}else if(item.getSize().equalsIgnoreCase("S")) {
+					count = count - item.getCount();
+					size.setsSize(count);;
+				}else if(item.getSize().equalsIgnoreCase("M")) {
+					count = count - item.getCount();
+					size.setmSize(count);;
+				}
+				
+				//productService.updateSize(item.getSize().toLowerCase() + "Size", size);
+				//更新
+				productService.updateSize(size);
 			}
-			
-			//productService.updateSize(item.getSize().toLowerCase() + "Size", size);
-			//更新
-			productService.updateSize(size);
 			
 			oitem.setOrders(order);
 			

@@ -153,13 +153,14 @@
 					</dl>
 			</div>
 				<div class="action">
-						
-						<dt>尺寸:</dt>
-						<dd>
-							<input type="radio" name="size" value="xl" onclick="getSize()" />XL&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="radio" name="size" value="xxl" onclick="getSize()" />XXL&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="radio" name="size" value="s" onclick="getSize()" />S&nbsp;&nbsp;&nbsp;&nbsp;
-						</dd>
+						<s:if test="#request.cid==1">
+							<dt>尺寸:</dt>
+							<dd>
+								<input type="radio" name="size" value="xl" onclick="getSize()" />XL&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="size" value="xxl" onclick="getSize()" />XXL&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="size" value="s" onclick="getSize()" />S&nbsp;&nbsp;&nbsp;&nbsp;
+							</dd>
+						</s:if>
 						
 						<dl class="quantity">
 							
@@ -176,8 +177,13 @@
 							</dd>
 						</dl>
 					<div class="buy">
+						<s:if test="#request.cid!=1">
+							<input id="addCart1" class="addCart" value="加入购物车" type="submit">
+						</s:if>
+						<s:else>
 							<input id="addCart" class="addCart" value="加入购物车" type="submit" disabled="disabled">
 							<span id="spanID"></span>
+						</s:else>
 					</div>
 				</div>
 			<div id="bar" class="bar">

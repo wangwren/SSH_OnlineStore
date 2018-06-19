@@ -75,16 +75,25 @@ public class CartAction extends ActionSupport implements SessionAware{
 		}
 		cartItem.setCount(count);
 		
-		Product product = productService.findById(pid);
-		cartItem.setProduct(product);
-		
-		//添加至购物车
-		Cart cart = getCart(session);
-		cart.addCart(cartItem);
-		
-		
-		return "addCartSuccess";
+		Integer cid = productService.findCidByPid(pid);
+		//如果cid查询到是1，就存在session中，方便前台显示尺寸，否则就不存
+		if(cid == 1) {
+			
+			session.put("cid", cid);
+			
+			//重复代码，可以重构
+			findPAndAddCart(cartItem);
+			
+			return "addCartSuccess";
+		}else {
+			
+			findPAndAddCart(cartItem);
+			
+			return "addCartSuccess";
+		}
 	}
+
+	
 	
 	/**
 	 * 清空购物车
@@ -117,6 +126,20 @@ public class CartAction extends ActionSupport implements SessionAware{
 	public String myCart() {
 		
 		return "myCartSuccess";
+	}
+	
+	
+	/**
+	 * @param cartItem 购物车
+	 * 查询指定编号的商品，添加至购物车
+	 */
+	private void findPAndAddCart(CartItem cartItem) {
+		Product product = productService.findById(pid);
+		cartItem.setProduct(product);
+		
+		//添加至购物车
+		Cart cart = getCart(session);
+		cart.addCart(cartItem);
 	}
 
 }

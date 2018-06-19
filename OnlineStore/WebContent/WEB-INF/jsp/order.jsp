@@ -38,7 +38,9 @@
 						<th>商品</th>
 						<th>价格</th>
 						<th>数量</th>
-						<th>尺寸</th>
+						<s:if test="#session.cid==1">
+							<th>尺寸</th>
+						</s:if>
 						<th>小计</th>
 						<th>操作</th>
 					</tr>
@@ -58,10 +60,11 @@
 								${item.count }
 								
 							</td>
-							<td class="quantity" width="60">
-								${item.size }
-								
-							</td>
+							<s:if test="#session.cid==1">
+								<td class="quantity" width="60">
+										${item.size}
+								</td>
+							</s:if>
 							<td width="140">
 								<span class="subtotal">￥${item.subtotal }</span>
 							</td>

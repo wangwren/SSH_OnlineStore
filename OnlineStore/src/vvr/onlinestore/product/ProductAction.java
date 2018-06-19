@@ -138,6 +138,8 @@ public class ProductAction extends ActionSupport implements RequestAware,ModelDr
 		//查询出全部一级分类与二级分类
 		List<Category> caList = categoryService.findAll();
 		request.put("caList", caList);
+		
+		Integer cid = productService.findCidByPid(product.getPid());
 		request.put("cid", cid);
 		
 		product = productService.findById(product.getPid());

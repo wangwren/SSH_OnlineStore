@@ -184,4 +184,9 @@ public class ProductService {
 	public void updateSize(Size size) {
 		productDao.updateSize(size);
 	}
+	
+	public Integer findCidByPid(Integer pid) {
+		
+		return productDao.findCidByPid(pid);
+	}
 }
