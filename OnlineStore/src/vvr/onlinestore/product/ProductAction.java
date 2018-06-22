@@ -321,6 +321,7 @@ public class ProductAction extends ActionSupport implements RequestAware,ModelDr
 		
 		Size size = productService.findSizeByPid(product.getPid());
 		request.put("size", size);
+		request.put("pid", product.getPid());
 		
 		return "findSizeByPidSuccess";
 	}

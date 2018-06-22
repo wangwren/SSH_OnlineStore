@@ -6,7 +6,7 @@
 <hibernate-mapping>
 	<class name="vvr.onlinestore.product.Size" table="size">
 		<id name="id" column="id">
-			<generator class="native"/>
+			<generator class="assigned"/>
 		</id>
 		
 		<property name="xlSize" column="XL"/>
@@ -14,7 +14,7 @@
 		<property name="ssSize" column="S"/>
 		<property name="mmSize" column="M"/>
 		
-		<one-to-one name="product" class="vvr.onlinestore.product.Product"></one-to-one>
+		<one-to-one name="product" class="vvr.onlinestore.product.Product" cascade="all"></one-to-one>
 	</class>
 
 </hibernate-mapping>

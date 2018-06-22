@@ -43,7 +43,8 @@
 							</tr>
 								<tr onmouseover="this.style.backgroundColor = 'white'"
 									onmouseout="this.style.backgroundColor = '#F5FAFE';">
-									<input type="hidden" name="size.id" value="${size.id}">
+									<%-- <input type="hidden" name="size.id" value="${size.id}"> --%>
+									<input type="hidden" name="size.id" value="${pid}">
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
 										width="10%">
 										${size.id}

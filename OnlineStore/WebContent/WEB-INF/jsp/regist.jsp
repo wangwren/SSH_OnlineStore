@@ -60,6 +60,8 @@
 					$("#usernameId").html("");
 				}
 			});
+		}else if(username.trim() == ""){
+			$("#usernameId").html("");
 		}
 	}
 	

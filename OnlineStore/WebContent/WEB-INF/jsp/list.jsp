@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>笨张张商品</title>
+	<title>商品</title>
 	<meta name="author" content="Mango Team">
 	<meta name="copyright" content="Mango">
 	<meta name="keywords" content="蔬菜">

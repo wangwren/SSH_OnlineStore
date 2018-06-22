@@ -184,7 +184,7 @@ public class ProductDao extends HibernateDaoSupport {
 	public Integer findSize(Integer id,String size) {
 		
 		//String hql = "select s." + size + "Size from RelationShip as rs,Size as s WHERE rs.id=s.id AND rs.product.pid=?";
-		String hql = "select " + size + "Size from Size where product.pid = ?";
+		String hql = "select " + size + "Size from Size s where s.product.pid = ?";
 		List<Integer> num = this.getHibernateTemplate().find(hql, id);
 		if(num.size() > 0) {
 			//System.out.println(num.get(0));
