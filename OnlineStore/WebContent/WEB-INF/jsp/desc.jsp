@@ -187,14 +187,17 @@
 					</div>
 				</div>
 			<div id="bar" class="bar">
+			
+				<!-- 在线qq客服 -->
+				<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=291762380&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:291762380:51" alt="在线咨询" title="在线咨询"/></a>
+				
+				
 				<ul>
-						<li id="introductionTab">
-							<a href="#introduction">商品介绍</a>
-						</li>
-						
+					<li id="introductionTab">
+						<a href="#introduction">商品介绍</a>
+					</li>
 				</ul>
 			</div>
-				
 				<div id="introduction" name="introduction" class="introduction">
 					<div class="title">
 						<strong>商品介绍</strong>
