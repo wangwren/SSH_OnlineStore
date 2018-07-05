@@ -306,7 +306,7 @@
 		</ul>
 	</div>
 	<div class="span24">
-		<div class="copyright">Copyright © 2005-2013 Mango商城 版权所有</div>
+		<div class="copyright">Copyright © 2005-2013 BZZ商城 版权所有</div>
 	</div>
 </div>
 <div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 190px; height: 191px;" src="./会员注册 - Powered By Mango Team_files/My97DatePicker.htm" frameborder="0" border="0" scrolling="no"></iframe></div></body></html>

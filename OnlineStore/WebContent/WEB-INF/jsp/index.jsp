@@ -248,7 +248,7 @@
 		</ul>
 	</div>
 	<div class="span24">
-		<div class="copyright">Copyright © 2005-2013 Mango商城 版权所有</div>
+		<div class="copyright">Copyright © 2005-2013 BZZ商城 版权所有</div>
 	</div>
 </div>
 </body></html>

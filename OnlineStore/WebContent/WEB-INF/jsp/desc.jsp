@@ -20,10 +20,14 @@
 </head>
 <body>
 <script type="text/javascript">
+
+	var stock = 0;
+
 	function getSize(){
 		
 		//alert("aaaaa");
 		var sizeValue = null;
+		
 		var size = document.getElementsByName("size");
 		for(var i = 0;i < size.length;i++){
 			if(size[i].checked == true){
@@ -33,9 +37,13 @@
 		}
 		//alert(sizeValue);
 		
+		
 		var url = "${pageContext.request.contextPath }/product_findSize.action?pid=${model.pid}";
 		var param = {"sizeValue" : sizeValue};
 		$.post(url,param,function(data){
+			
+			stock = data;
+			
 			if(data == "null" || data == 0){
 				
 				$("#spanID").html("<font color='red'>(库存不足！)</font>");
@@ -44,6 +52,7 @@
 				
 				$("#spanID").html("<font>(库存数量"+data+")</font>");
 				document.getElementById("addCart").disabled = false;
+				
 			}
 				
 		});
@@ -51,6 +60,19 @@
 		
 		//选中尺寸后，提交按钮才可以点击
 		//document.getElementById("addCart").disabled = false;
+	}
+	
+	function checkeSize() {
+		//从表单获取的数值是字符串类型，需要转成数值类型才可以进行比较
+		var quantity = parseInt(document.getElementById("quantity").value);
+		if(quantity > stock){
+			
+			alert("您填写的数量超过上限");
+			document.getElementById("addCart").disabled = true;
+		}else{
+			document.getElementById("addCart").disabled = false;
+		}
+		
 	}
 </script>
 <form action="${pageContext.request.contextPath }/cart_addCart.action" method="post">
@@ -166,7 +188,7 @@
 							
 							<dt>购买数量:</dt>
 							<dd>
-								<input id="quantity" name="count" value="1" maxlength="4" onpaste="return false;" type="text">
+								<input id="quantity" name="count" value="1" maxlength="4" onpaste="return false;" type="text" onblur="checkeSize()">
 								<%-- <div>
 									<span id="increase" class="increase">&nbsp;</span>
 									<span id="decrease" class="decrease">&nbsp;</span>
@@ -258,7 +280,7 @@
 		</ul>
 	</div>
 	<div class="span24">
-		<div class="copyright">Copyright © 2005-2013 Mango商城 版权所有</div>
+		<div class="copyright">Copyright © 2005-2013 BZZ商城 版权所有</div>
 	</div>
 </div>
 </form>

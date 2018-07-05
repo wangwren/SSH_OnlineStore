@@ -3,7 +3,7 @@
   		"-//Apache Struts//XWork Validator 1.0.3//EN"
   		"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
 
-<!-- 用户注册的后台验证 -->
+<!-- 用户登录的后台验证 -->
 <validators>
 	<field name="username">
 		<field-validator type="requiredstring">

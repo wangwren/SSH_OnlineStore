@@ -138,6 +138,12 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 		}
 		
 		//封装订单
+		//Long a = System.currentTimeMillis();
+		//时间戳 + 用户id生成订单编号，想这样生成订单，但是项目已写完，改字段类型工程量太大，而且容易崩
+		String id = System.currentTimeMillis() + "" + user.getUid();
+		
+		
+		
 		order = new Orders();
 		order.setOrdertime(new Date());
 		order.setState(0); 		//0代表订单未支付     1代表支付未发货        2代表发货未确认收货    3代表确认收货
@@ -164,10 +170,10 @@ public class OrdersAction extends ActionSupport implements SessionAware,RequestA
 				}else if(item.getSize().equalsIgnoreCase("XXL")) {
 					count = count - item.getCount();
 					size.setXxlSize(count);;
-				}else if(item.getSize().equalsIgnoreCase("S")) {
+				}else if(item.getSize().equalsIgnoreCase("SS")) {
 					count = count - item.getCount();
 					size.setSsSize(count);
-				}else if(item.getSize().equalsIgnoreCase("M")) {
+				}else if(item.getSize().equalsIgnoreCase("MM")) {
 					count = count - item.getCount();
 					size.setMmSize(count);
 				}
